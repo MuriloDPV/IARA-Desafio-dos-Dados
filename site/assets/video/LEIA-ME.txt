@@ -1,0 +1,15 @@
+Esta pasta não é mais usada pelo site.
+
+Nenhum HTML/CSS/JS do projeto referencia vídeo hoje: a demonstração
+sincronizada (celular + painel) e o vídeo do bug do "talvez" foram
+ambos removidos do escopo — o post do bug ficou só com a foto real
+(foto-erro.jpg, em assets/img/).
+
+Os arquivos abaixo continuam nesta pasta mas estão órfãos; podem ser
+apagados quando quiser, não é obrigatório:
+
+  demo-celular.mp4
+  demo-painel.mp4
+
+(demo-bug-talvez.mp4 nunca chegou a existir aqui — o vídeo do bug foi
+descartado antes de ser gravado.)

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iara — atendimento que se adapta a você</title>
+  <meta name="description" content="A Iara adapta o atendimento ao nível de letramento digital de cada pessoa, sem nunca perguntar isso diretamente. Projeto do Squad Aura para o Desafio dos Dados 2026.">
+  <link rel="icon" href="assets/img/logo-iara.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Iara — página inicial">
+        <img class="brand-logo" src="assets/img/logo-iara.png" alt="Iara">
+        <span class="brand-name">Iara</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="como-funciona.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 4 12l5 6"/><path d="M15 6l5 6-5 6"/></svg><span>Como funciona</span></a>
+        <a href="seguranca.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança</span></a>
+        <a href="escala.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="13"/><line x1="12" y1="19" x2="12" y2="9"/><line x1="19" y1="19" x2="19" y2="5"/></svg><span>Escala</span></a>
+        <a href="perguntas.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 1 1 4.6 2.2c-.9.6-1.5 1.1-1.5 2.3"/><circle cx="12" cy="17.3" r="0.75" fill="currentColor" stroke="none"/></svg><span>Perguntas</span></a>
+        <a href="apresentacao.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6.3v11.4l9.5-5.7z"/></svg><span>Apresentação</span></a>
+        <a href="blog/index.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><line x1="9.5" y1="12.5" x2="14.5" y2="12.5"/><line x1="9.5" y1="16" x2="14.5" y2="16"/></svg><span>Blog</span></a>
+        <a href="squad.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg><span>Sobre o squad</span></a>
+        <a class="btn btn--primary" href="testar.html">Testar a Iara</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Squad Aura · Desafio dos Dados 2026</span>
+          <h1>IARA</h1>
+          <p class="hero-sub">Uma assistente que adapta o atendimento ao <strong>nível de letramento digital</strong> de cada pessoa — sem nunca perguntar isso diretamente.</p>
+          <div class="hero-actions">
+            <div class="telegram-actions">
+              <a class="btn btn--primary" href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+                Abrir no app Telegram
+              </a>
+              <a class="btn btn--ghost" href="https://web.telegram.org/k/#@projetoIara_bot" target="_blank" rel="noopener">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 6h16v2H4V6zm0 12v-8h16v8H4z"/></svg>
+                Abrir no navegador
+              </a>
+            </div>
+            <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=HpxKFjMDhic" target="_blank" rel="noopener noreferrer">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              Assistir ao vídeo
+            </a>
+          </div>
+          <p class="ai-disclaimer">A Iara é uma inteligência artificial e, como qualquer outra IA, pode cometer erros.</p>
+          <div class="live-counter-split">
+            <div class="live-counter-card is-loading" data-live-counter aria-live="polite">
+              <strong class="live-counter-number" data-live-counter-number>···</strong>
+              <span class="live-counter-label">atendimentos reais</span>
+              <span class="live-counter-version" data-live-counter-version hidden></span>
+            </div>
+            <p class="live-counter-note">Obrigado a todos que testaram a Iara! Cada atendimento gera <strong class="hl--dados">dados</strong> reais que a <strong class="hl--equipe">equipe</strong> analisa pra lançar <strong class="hl--versoes">versões</strong> cada vez melhores.</p>
+          </div>
+        </div>
+        <div>
+          <div class="hero-signal" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <p class="hero-signal-caption">Três caminhos de atendimento. Um sinal que se ajusta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ O PROBLEMA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">O problema</span>
+          <h2>O atendimento digital não fala a língua de todo mundo</h2>
+          <p>Apps, sites e chatbots costumam ser feitos para quem já sabe usá-los. No Brasil, essa é a exceção — não a regra.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <div class="stat-number"><span data-count="29">29</span><sup>%</sup></div>
+            <p class="stat-label">dos brasileiros entre 15 e 64 anos são analfabetos funcionais.</p>
+          </div>
+          <div class="stat reveal" style="--d: 0.15s">
+            <div class="stat-number"><span data-count="78">78</span><sup>%</sup></div>
+            <p class="stat-label">tiveram desempenho baixo ou médio em tarefas digitais.</p>
+          </div>
+        </div>
+        <p class="stat-source reveal">Fonte: Inaf 2024 · Ação Educativa</p>
+      </div>
+    </section>
+
+    <!-- ============ A IDEIA ============ -->
+    <section class="section section--dark">
+      <div class="container thesis reveal">
+        <span class="eyebrow">A ideia</span>
+        <p class="thesis-line">Não é sobre <em>o que</em> você pede.</p>
+        <p class="thesis-line">É sobre <strong>como</strong> você fala.</p>
+        <p class="thesis-note">A Iara lê a forma da mensagem — o vocabulário, a estrutura, o jeito de pedir — e adapta a resposta na hora, sem fazer nenhuma pergunta sobre escolaridade.</p>
+      </div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA (3 CAMINHOS) ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">
+            <span class="signal signal--paths" aria-hidden="true"><span></span><span></span><span></span></span>
+            Como funciona
+          </span>
+          <h2>Três caminhos, uma conversa</h2>
+          <p>Cada mensagem é atendida no ritmo de quem escreve. Repare que até os cards abaixo têm ritmos diferentes — de propósito.</p>
+        </div>
+        <div class="paths-grid">
+          <article class="path-card path-card--guiado reveal">
+            <div class="path-card-bar"></div>
+            <div class="path-card-body">
+              <div class="path-card-head">
+                <h3>Guiado</h3>
+                <span class="signal signal--lg animate" aria-hidden="true"><span></span><span></span><span></span></span>
+              </div>
+              <p>Confirma cada passo, com calma, para quem precisa de mais suporte. Uma coisa de cada vez, sem pressa e sem jargão.</p>
+              <span class="path-tag">Mais devagar é mais cuidado</span>
+            </div>
+          </article>
+          <article class="path-card path-card--inter reveal" style="--d: 0.15s">
+            <div class="path-card-bar"></div>
+            <div class="path-card-body">
+              <div class="path-card-head">
+                <h3>Intermediário</h3>
+                <span class="signal signal--lg animate" aria-hidden="true"><span></span><span></span><span></span></span>
+              </div>
+              <p>Passo a passo mais rápido, com menos confirmações.</p>
+              <span class="path-tag">Ritmo equilibrado</span>
+            </div>
+          </article>
+          <article class="path-card path-card--direto reveal" style="--d: 0.3s">
+            <div class="path-card-bar"></div>
+            <div class="path-card-body">
+              <div class="path-card-head">
+                <h3>Direto</h3>
+                <span class="signal signal--lg animate" aria-hidden="true"><span></span><span></span><span></span></span>
+              </div>
+              <p>Resolve numa mensagem só, quando a pessoa já disse tudo.</p>
+              <span class="path-tag">Sem rodeios</span>
+            </div>
+          </article>
+        </div>
+        <p class="reveal" style="margin-top: 2rem;"><a href="como-funciona.html">Conheça a arquitetura por trás dos três caminhos →</a></p>
+      </div>
+    </section>
+
+    <!-- ============ ANTES E DEPOIS ============ -->
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Antes e depois</span>
+          <h2>A mesma mensagem, duas conversas</h2>
+          <p>O que muda quando o atendimento escuta o jeito de falar, e não só as palavras-chave.</p>
+        </div>
+        <div class="compare-grid">
+          <div class="compare-panel reveal">
+            <span class="compare-label">Atendimento comum</span>
+            <div class="chat">
+              <div class="bubble bubble--user">
+                <span class="bubble-who">Cliente</span>
+                minha internet não tá funcionando
+              </div>
+              <div class="bubble bubble--system">
+                <span class="bubble-who">Sistema</span>
+                Para suporte técnico, acesse nosso app ou disque 10315.
+              </div>
+            </div>
+          </div>
+          <div class="compare-panel compare-panel--iara reveal" style="--d: 0.15s">
+            <span class="compare-label">Com a Iara</span>
+            <div class="chat">
+              <div class="bubble bubble--user">
+                <span class="bubble-who">Cliente</span>
+                minha internet não tá funcionando
+              </div>
+              <div class="bubble bubble--iara">
+                <span class="bubble-who">Iara</span>
+                Oi! Pelo que entendi, seu telefone ou internet não está funcionando direito. É isso mesmo?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTES REAIS ============ -->
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Testes reais</span>
+          <h2>Testada com quem mais importa</h2>
+          <p>Antes de qualquer demonstração, a Iara foi testada com pessoas reais de diferentes gerações — cada uma representando, naturalmente, um nível diferente de familiaridade digital.</p>
+        </div>
+        <div class="testers-grid">
+          <article class="tester-card reveal">
+            <span class="signal signal--paths animate" aria-hidden="true"><span></span><span></span><span></span></span>
+            <h3>A avó</h3>
+            <p>Conversou com a Iara sem receber nenhuma instrução antes — e foi atendida no ritmo dela.</p>
+          </article>
+          <article class="tester-card reveal" style="--d: 0.15s">
+            <span class="signal signal--paths animate" aria-hidden="true"><span></span><span></span><span></span></span>
+            <h3>O pai</h3>
+            <p>Mais acostumado com tecnologia, foi direto ao ponto — e a Iara também.</p>
+          </article>
+        </div>
+        <p class="reveal" style="margin-top: 2rem;"><a href="blog/post-familia.html">Leia a história completa no blog →</a></p>
+      </div>
+    </section>
+
+    <!-- ============ IMPACTO SOCIAL ============ -->
+    <section class="section">
+      <div class="container reveal">
+        <div class="section-head section-head--center" style="margin-bottom: 2rem;">
+          <span class="eyebrow">
+            <span class="signal signal--paths animate" aria-hidden="true"><span></span><span></span><span></span></span>
+            Impacto social
+          </span>
+          <h2>Por que isso importa de verdade</h2>
+        </div>
+        <p class="impact-quote">Não é sobre estatística abstrata. É a avó que desiste no meio de um aplicativo, o vizinho que liga pro 0800 porque não confia em digitar errado, o pai que evita mexer no próprio plano de celular. A cada atendimento automatizado que trata todo mundo do mesmo jeito, <strong>alguém fica pra trás</strong> — não porque não é capaz, mas porque o sistema não foi pensado pra ele.</p>
+      </div>
+    </section>
+
+    <!-- ============ ÉTICA ============ -->
+    <section class="section section--dark">
+      <div class="container reveal">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">Ética</span>
+          <h2>Adaptar não é rotular</h2>
+        </div>
+        <blockquote class="ethics-quote">A gente não está classificando pessoas. A gente está adaptando o jeito de falar, conforme a mensagem de agora — amanhã, a Iara ouve de novo, do zero.</blockquote>
+        <div class="ethics-facts">
+          <span class="ethics-fact"><strong>Nada persiste:</strong>&nbsp;o nível nunca fica gravado entre atendimentos</span>
+          <span class="ethics-fact"><strong>LGPD by design:</strong>&nbsp;privacidade decidida no projeto, não remendada depois</span>
+        </div>
+        <p style="text-align: center; margin-top: 2rem;"><a href="blog/post-privacidade.html">Por que a Iara esquece você →</a></p>
+      </div>
+    </section>
+
+    <!-- ============ NÃO É TECNOLOGIA NOVA ============ -->
+    <section class="section section--tint">
+      <div class="container reveal" style="text-align: center;">
+        <span class="eyebrow">Contexto</span>
+        <h2>Uma melhoria, não uma invenção</h2>
+        <p class="center-lead">A maioria das empresas já usa algum tipo de assistente de chat — só que quase sempre é um só, genérico, do mesmo jeito pra todo mundo. <strong>A Iara não é uma tecnologia nova.</strong> É uma melhoria em cima de uma tecnologia que já está em toda parte, e que só vai crescer.</p>
+      </div>
+    </section>
+
+    <!-- ============ ODS ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Impacto</span>
+          <h2>Compromissos com o mundo real</h2>
+          <p>O projeto se alinha a duas metas globais da ONU — e ao debate mais recente sobre inclusão digital.</p>
+        </div>
+        <div class="ods-grid">
+          <article class="ods-card reveal">
+            <span class="ods-num ods-num--10" aria-hidden="true">10</span>
+            <div>
+              <h3>ODS 10 — Redução das Desigualdades</h3>
+              <p>Atendimento que não exclui quem tem menos familiaridade digital: a tecnologia se adapta à pessoa, e não o contrário.</p>
+            </div>
+          </article>
+          <article class="ods-card reveal" style="--d: 0.15s">
+            <span class="ods-num ods-num--9" aria-hidden="true">9</span>
+            <div>
+              <h3>ODS 9 — Indústria, Inovação e Infraestrutura</h3>
+              <p>Inovação aplicada ao atendimento de telecomunicações, uma infraestrutura essencial da vida digital.</p>
+            </div>
+          </article>
+        </div>
+        <p class="ods-pact reveal">O projeto também dialoga com o <strong>Pacto Digital Global da ONU (2024)</strong>, que coloca a inclusão digital significativa — não só o acesso, mas a capacidade de usar — entre as prioridades internacionais.</p>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="section section--tint cta-band">
+      <div class="container reveal">
+        <h2>Converse com a Iara do seu jeito. Ela se adapta.</h2>
+        <div class="hero-actions">
+          <div class="telegram-actions">
+            <a class="btn btn--primary btn--xl" href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+              Abrir no app Telegram
+            </a>
+            <a class="btn btn--ghost btn--xl" href="https://web.telegram.org/k/#@projetoIara_bot" target="_blank" rel="noopener">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 6h16v2H4V6zm0 12v-8h16v8H4z"/></svg>
+              Abrir no navegador
+            </a>
+          </div>
+          <a class="btn btn--ghost btn--xl" href="testar.html">Ver sugestões de mensagem</a>
+        </div>
+        <p class="ai-disclaimer">A Iara é uma inteligência artificial e, como qualquer outra IA, pode cometer erros.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="3" y="18" width="7" height="11" rx="2" fill="#E0A47C"/>
+            <rect x="12.5" y="11" width="7" height="18" rx="2" fill="#E3C56A"/>
+            <rect x="22" y="3" width="7" height="26" rx="2" fill="#5FBDB0"/>
+          </svg>
+          <span class="brand-name">Iara</span>
+        </a>
+        <p>Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.</p>
+      </div>
+      <div class="footer-col">
+        <h4>O projeto</h4>
+        <nav aria-label="Páginas do projeto">
+          <a href="como-funciona.html">Como funciona</a>
+          <a href="seguranca.html">Segurança</a>
+          <a href="escala.html">Escala</a>
+          <a href="perguntas.html">Perguntas frequentes</a>
+          <a href="apresentacao.html">Apresentação</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="squad.html">Sobre o squad</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Experimente</h4>
+        <nav aria-label="Links para testar">
+          <a href="testar.html">Testar a Iara</a>
+          <a href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">Bot no Telegram</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Redes sociais</h4>
+        <nav aria-label="Redes sociais">
+          <a href="https://www.youtube.com/@ProjetoIaraAura" target="_blank" rel="noopener noreferrer">Canal no YouTube</a>
+          <a href="https://www.instagram.com/projetoiara.tech/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <p class="footer-credit">Projeto desenvolvido para o Desafio dos Dados 2026, promovido pela Fundação Telefônica Vivo.</p>
+      <p>Squad Aura · Desafio dos Dados 2026 · E.E.E.B. João XXIII</p>
+      <p>ODS 9 · ODS 10 · Pacto Digital Global da ONU</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

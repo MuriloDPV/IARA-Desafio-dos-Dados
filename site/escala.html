@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iara — de 10 a 10 mil, sem perder o que importa</title>
+  <meta name="description" content="Como a Iara cresce: cada atendimento gera um dado, cada dado ensina a equipe, e cada nova versão nasce mais preparada. A mesma arquitetura de 10 a 10 mil atendimentos.">
+  <link rel="icon" href="assets/img/logo-iara.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Iara — página inicial">
+        <img class="brand-logo" src="assets/img/logo-iara.png" alt="Iara">
+        <span class="brand-name">Iara</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="como-funciona.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 4 12l5 6"/><path d="M15 6l5 6-5 6"/></svg><span>Como funciona</span></a>
+        <a href="seguranca.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança</span></a>
+        <a href="escala.html" class="is-active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="13"/><line x1="12" y1="19" x2="12" y2="9"/><line x1="19" y1="19" x2="19" y2="5"/></svg><span>Escala</span></a>
+        <a href="perguntas.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 1 1 4.6 2.2c-.9.6-1.5 1.1-1.5 2.3"/><circle cx="12" cy="17.3" r="0.75" fill="currentColor" stroke="none"/></svg><span>Perguntas</span></a>
+        <a href="apresentacao.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6.3v11.4l9.5-5.7z"/></svg><span>Apresentação</span></a>
+        <a href="blog/index.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><line x1="9.5" y1="12.5" x2="14.5" y2="12.5"/><line x1="9.5" y1="16" x2="14.5" y2="16"/></svg><span>Blog</span></a>
+        <a href="squad.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg><span>Sobre o squad</span></a>
+        <a class="btn btn--primary" href="testar.html">Testar a Iara</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="escala-hero" id="hero">
+      <div class="container escala-hero-inner">
+        <span class="eyebrow reveal">Escala &amp; futuro</span>
+        <h1 class="reveal" style="--d: 0.08s">De 10 a 10 mil,<br>sem perder o que importa</h1>
+        <p class="escala-hero-sub reveal" style="--d: 0.16s">A Iara atende cada pessoa como se fosse a única. E cada atendimento vira um dado que a <strong>equipe</strong> usa pra preparar uma versão melhor que a anterior.</p>
+        <div class="live-counter live-counter--hero is-loading reveal" style="--d: 0.24s" data-live-counter-animate aria-live="polite">
+          <div class="live-counter-figure">
+            <strong class="live-counter-number" data-live-counter-number>···</strong>
+            <span class="live-counter-label">atendimentos reais</span>
+          </div>
+          <p class="live-counter-text">Número puxado do painel, ao vivo. Cada um deles virou um dado que a equipe analisa pra melhorar as próximas versões.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. O CICLO DE MELHORIA ============ -->
+    <section class="section section--dark" id="ciclo">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <span class="eyebrow">O ciclo de melhoria</span>
+          <h2>Quem aprende é a equipe</h2>
+          <p>O nível de letramento nunca fica salvo entre atendimentos — por privacidade. O que fica é o dado agregado no painel. É ele que a equipe estuda pra melhorar o código, versão após versão.</p>
+        </div>
+
+        <div class="cycle-diagram reveal" role="img" aria-label="Diagrama circular do ciclo de melhoria: o atendimento acontece, o painel registra o dado, a equipe analisa, o código melhora, a próxima versão nasce — e o ciclo recomeça.">
+
+          <!-- versão desktop: ciclo circular -->
+          <svg class="cycle-svg cycle-svg--desktop" viewBox="0 0 760 620" aria-hidden="true">
+            <!-- trilho base -->
+            <path class="cycle-base" d="M 380 120 A 200 200 0 0 1 380 520 A 200 200 0 0 1 380 120"/>
+            <!-- fluxo contínuo (tracejado andando) -->
+            <path class="cycle-flow" d="M 380 120 A 200 200 0 0 1 380 520 A 200 200 0 0 1 380 120"/>
+            <!-- cometa: o "pacote" que percorre o ciclo -->
+            <path class="cycle-comet" d="M 380 120 A 200 200 0 0 1 380 520 A 200 200 0 0 1 380 120"/>
+
+            <!-- nó 1: atendimento acontece (topo) -->
+            <g class="cycle-node" style="--n: 0">
+              <circle class="cycle-pulse" cx="380" cy="120" r="30"/>
+              <circle class="cycle-dot" cx="380" cy="120" r="26"/>
+              <text class="cycle-num" x="380" y="120" dy="0.36em">1</text>
+              <text class="cycle-label" x="380" y="62" text-anchor="middle">Atendimento
+                <tspan x="380" dy="1.3em">acontece</tspan></text>
+            </g>
+            <!-- nó 2: painel registra o dado (direita, alto) -->
+            <g class="cycle-node" style="--n: 1">
+              <circle class="cycle-pulse" cx="570" cy="258" r="30"/>
+              <circle class="cycle-dot" cx="570" cy="258" r="26"/>
+              <text class="cycle-num" x="570" y="258" dy="0.36em">2</text>
+              <text class="cycle-label" x="612" y="248" text-anchor="start">Painel registra
+                <tspan x="612" dy="1.3em">o dado</tspan></text>
+            </g>
+            <!-- nó 3: equipe analisa (direita, baixo) -->
+            <g class="cycle-node" style="--n: 2">
+              <circle class="cycle-pulse" cx="498" cy="482" r="30"/>
+              <circle class="cycle-dot" cx="498" cy="482" r="26"/>
+              <text class="cycle-num" x="498" y="482" dy="0.36em">3</text>
+              <text class="cycle-label" x="516" y="540" text-anchor="middle">Equipe
+                <tspan x="516" dy="1.3em">analisa</tspan></text>
+            </g>
+            <!-- nó 4: código melhora (esquerda, baixo) -->
+            <g class="cycle-node" style="--n: 3">
+              <circle class="cycle-pulse" cx="262" cy="482" r="30"/>
+              <circle class="cycle-dot" cx="262" cy="482" r="26"/>
+              <text class="cycle-num" x="262" y="482" dy="0.36em">4</text>
+              <text class="cycle-label" x="244" y="540" text-anchor="middle">Código
+                <tspan x="244" dy="1.3em">melhora</tspan></text>
+            </g>
+            <!-- nó 5: próxima versão nasce (esquerda, alto) -->
+            <g class="cycle-node" style="--n: 4">
+              <circle class="cycle-pulse" cx="190" cy="258" r="30"/>
+              <circle class="cycle-dot" cx="190" cy="258" r="26"/>
+              <text class="cycle-num" x="190" y="258" dy="0.36em">5</text>
+              <text class="cycle-label" x="148" y="248" text-anchor="end">Próxima versão
+                <tspan x="148" dy="1.3em">nasce</tspan></text>
+            </g>
+          </svg>
+
+          <!-- versão mobile: fluxo vertical com retorno -->
+          <svg class="cycle-svg cycle-svg--mobile" viewBox="0 0 340 570" aria-hidden="true">
+            <path class="cycle-base" d="M 64 56 L 64 512"/>
+            <path class="cycle-flow" d="M 64 56 L 64 512"/>
+            <!-- retorno: do último nó de volta pro primeiro -->
+            <path class="cycle-base" d="M 64 512 C 6 512 6 56 64 56"/>
+            <path class="cycle-flow cycle-flow--back" d="M 64 512 C 6 512 6 56 64 56"/>
+
+            <g class="cycle-node" style="--n: 0">
+              <circle class="cycle-pulse" cx="64" cy="56" r="24"/>
+              <circle class="cycle-dot" cx="64" cy="56" r="20"/>
+              <text class="cycle-num" x="64" y="56" dy="0.36em">1</text>
+              <text class="cycle-label" x="100" y="56" dy="0.36em" text-anchor="start">Atendimento acontece</text>
+            </g>
+            <g class="cycle-node" style="--n: 1">
+              <circle class="cycle-pulse" cx="64" cy="170" r="24"/>
+              <circle class="cycle-dot" cx="64" cy="170" r="20"/>
+              <text class="cycle-num" x="64" y="170" dy="0.36em">2</text>
+              <text class="cycle-label" x="100" y="170" dy="0.36em" text-anchor="start">Painel registra o dado</text>
+            </g>
+            <g class="cycle-node" style="--n: 2">
+              <circle class="cycle-pulse" cx="64" cy="284" r="24"/>
+              <circle class="cycle-dot" cx="64" cy="284" r="20"/>
+              <text class="cycle-num" x="64" y="284" dy="0.36em">3</text>
+              <text class="cycle-label" x="100" y="284" dy="0.36em" text-anchor="start">Equipe analisa</text>
+            </g>
+            <g class="cycle-node" style="--n: 3">
+              <circle class="cycle-pulse" cx="64" cy="398" r="24"/>
+              <circle class="cycle-dot" cx="64" cy="398" r="20"/>
+              <text class="cycle-num" x="64" y="398" dy="0.36em">4</text>
+              <text class="cycle-label" x="100" y="398" dy="0.36em" text-anchor="start">Código melhora</text>
+            </g>
+            <g class="cycle-node" style="--n: 4">
+              <circle class="cycle-pulse" cx="64" cy="512" r="24"/>
+              <circle class="cycle-dot" cx="64" cy="512" r="20"/>
+              <text class="cycle-num" x="64" y="512" dy="0.36em">5</text>
+              <text class="cycle-label" x="100" y="506" text-anchor="start">Próxima versão
+                <tspan x="100" dy="1.3em">nasce</tspan></text>
+            </g>
+          </svg>
+
+          <p class="cycle-caption">O ciclo se repete a cada versão — e recomeça do zero pra cada pessoa atendida.</p>
+        </div>
+
+        <div class="cycle-example reveal">
+          <span class="cycle-example-label">Exemplo real, do nosso painel</span>
+          <p>Foi assim que a equipe descobriu, num teste real, que a resposta <em>"talvez"</em> travava o sistema — e corrigiu antes da versão seguinte. <a href="blog/post-talvez.html">A história completa está no blog →</a></p>
+        </div>
+
+        <p class="cycle-phrase reveal">Cada atendimento gera um <strong>dado</strong>. Cada dado ensina a <strong>equipe</strong>. E cada nova versão da Iara nasce um pouco mais preparada que a anterior.</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. ESCALA TÉCNICA ============ -->
+    <section class="section" id="escala-tecnica">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Escala técnica</span>
+          <h2>A arquitetura não muda entre 10 e 10 mil atendimentos</h2>
+          <p>Não existe um "plano B" pra volume alto. O caminho que atende 10 pessoas é o mesmo que atenderia 10 mil — o que cresce é o número de conversas, não a complexidade do sistema.</p>
+        </div>
+
+        <div class="scale-compare">
+          <div class="scale-panel reveal">
+            <div class="scale-dots scale-dots--few" aria-hidden="true"></div>
+            <p class="scale-panel-num">10</p>
+            <p class="scale-panel-label">atendimentos</p>
+          </div>
+          <div class="scale-center reveal" style="--d: 0.15s">
+            <span class="signal signal--lg signal--paths animate" aria-hidden="true"><span></span><span></span><span></span></span>
+            <p class="scale-center-label">o mesmo sistema<br>no meio</p>
+          </div>
+          <div class="scale-panel reveal" style="--d: 0.3s">
+            <div class="scale-dots scale-dots--many" aria-hidden="true"></div>
+            <p class="scale-panel-num">10.000</p>
+            <p class="scale-panel-label">atendimentos</p>
+          </div>
+        </div>
+
+        <p class="scale-cost reveal"><strong>R$ 0,06 por atendimento</strong> — detalhes completos em <a href="como-funciona.html#custo">Como Funciona</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4. ALÉM DA TELEFONIA ============ -->
+    <section class="section section--tint" id="alem-da-telefonia">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Além da telefonia</span>
+          <h2>O mesmo mecanismo, em qualquer atendimento que já existe</h2>
+          <p>As duas camadas de classificação são desacopladas da tarefa específica — qualquer central de atendimento que hoje trata todo mundo do mesmo jeito poderia reaproveitar o mesmo mecanismo.</p>
+        </div>
+        <div class="sector-grid">
+          <article class="sector-card reveal">
+            <span class="sector-icon sector-icon--banco" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7"/><path d="M3 20h18"/>
+              </svg>
+            </span>
+            <h3>Bancos</h3>
+            <p>O mesmo mecanismo poderia guiar, no ritmo de cada pessoa, quem hoje desiste no meio do aplicativo do banco.</p>
+          </article>
+          <article class="sector-card reveal" style="--d: 0.1s">
+            <span class="sector-icon sector-icon--saude" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 4h5v5.5H20v5h-5.5V20h-5v-5.5H4v-5h5.5z"/>
+              </svg>
+            </span>
+            <h3>Saúde</h3>
+            <p>Marcar consulta ou tirar dúvida de convênio, com um atendimento que se ajusta a quem escreve.</p>
+          </article>
+          <article class="sector-card reveal" style="--d: 0.2s">
+            <span class="sector-icon sector-icon--governo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v4"/><path d="M12 3h6v3h-6"/><path d="M6 20V10a6 6 0 0 1 12 0v10"/><path d="M4 20h16"/><path d="M10 20v-4h4v4"/>
+              </svg>
+            </span>
+            <h3>Órgãos públicos</h3>
+            <p>Serviços digitais que hoje tratam todo cidadão do mesmo jeito poderiam escutar o jeito de cada um.</p>
+          </article>
+          <article class="sector-card reveal" style="--d: 0.3s">
+            <span class="sector-icon sector-icon--operadora" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21V11"/><circle cx="12" cy="9" r="2.4"/><path d="M7.8 13.2a6 6 0 0 1 0-8.4M16.2 4.8a6 6 0 0 1 0 8.4"/><path d="M5 15.9a10 10 0 0 1 0-13.8M19 2.1a10 10 0 0 1 0 13.8"/>
+              </svg>
+            </span>
+            <h3>Outras operadoras</h3>
+            <p>A classificação não sabe nada de telefonia por obrigação — outra operadora usaria o mesmo motor, com outras tarefas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. FECHAMENTO ============ -->
+    <section class="section" id="fechamento">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Compromissos</span>
+          <h2>Crescer sem deixar ninguém pra trás</h2>
+        </div>
+        <div class="ods-grid">
+          <article class="ods-card reveal">
+            <span class="ods-num ods-num--10" aria-hidden="true">10</span>
+            <div>
+              <h3>ODS 10 — Redução das Desigualdades</h3>
+              <p>Atendimento que não exclui quem tem menos familiaridade digital: a tecnologia se adapta à pessoa, e não o contrário.</p>
+            </div>
+          </article>
+          <article class="ods-card reveal" style="--d: 0.15s">
+            <span class="ods-num ods-num--9" aria-hidden="true">9</span>
+            <div>
+              <h3>ODS 9 — Indústria, Inovação e Infraestrutura</h3>
+              <p>Inovação aplicada ao atendimento de telecomunicações, uma infraestrutura essencial da vida digital.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint cta-band">
+      <div class="container reveal">
+        <h2>Veja com seus olhos o atendimento que se adapta.</h2>
+        <div class="hero-actions">
+          <a class="btn btn--primary btn--xl" href="testar.html">Testar a Iara</a>
+          <a class="btn btn--ghost btn--xl" href="https://www.youtube.com/watch?v=HpxKFjMDhic" target="_blank" rel="noopener noreferrer">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Assistir ao vídeo
+          </a>
+        </div>
+        <p class="ai-disclaimer">A Iara é uma inteligência artificial e, como qualquer outra IA, pode cometer erros.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="3" y="18" width="7" height="11" rx="2" fill="#E0A47C"/>
+            <rect x="12.5" y="11" width="7" height="18" rx="2" fill="#E3C56A"/>
+            <rect x="22" y="3" width="7" height="26" rx="2" fill="#5FBDB0"/>
+          </svg>
+          <span class="brand-name">Iara</span>
+        </a>
+        <p>Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.</p>
+      </div>
+      <div class="footer-col">
+        <h4>O projeto</h4>
+        <nav aria-label="Páginas do projeto">
+          <a href="como-funciona.html">Como funciona</a>
+          <a href="seguranca.html">Segurança</a>
+          <a href="escala.html">Escala</a>
+          <a href="perguntas.html">Perguntas frequentes</a>
+          <a href="apresentacao.html">Apresentação</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="squad.html">Sobre o squad</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Experimente</h4>
+        <nav aria-label="Links para testar">
+          <a href="testar.html">Testar a Iara</a>
+          <a href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">Bot no Telegram</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Redes sociais</h4>
+        <nav aria-label="Redes sociais">
+          <a href="https://www.youtube.com/@ProjetoIaraAura" target="_blank" rel="noopener noreferrer">Canal no YouTube</a>
+          <a href="https://www.instagram.com/projetoiara.tech/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <p class="footer-credit">Projeto desenvolvido para o Desafio dos Dados 2026, promovido pela Fundação Telefônica Vivo.</p>
+      <p>Squad Aura · Desafio dos Dados 2026 · E.E.E.B. João XXIII</p>
+      <p>ODS 9 · ODS 10 · Pacto Digital Global da ONU</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/escala.js"></script>
+</body>
+</html>

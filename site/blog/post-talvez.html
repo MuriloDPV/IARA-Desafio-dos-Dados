@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O bug do 'talvez' — Blog da Iara</title>
+  <meta name="description" content="Como uma resposta de seis letras derrubou o fluxo de confirmação da Iara — e o que a gente aprendeu investigando a causa raiz antes de corrigir.">
+  <link rel="icon" href="../assets/img/logo-iara.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../index.html" aria-label="Iara — página inicial">
+        <img class="brand-logo" src="../assets/img/logo-iara.png" alt="Iara">
+        <span class="brand-name">Iara</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="../como-funciona.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 4 12l5 6"/><path d="M15 6l5 6-5 6"/></svg><span>Como funciona</span></a>
+        <a href="../seguranca.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança</span></a>
+        <a href="../escala.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="13"/><line x1="12" y1="19" x2="12" y2="9"/><line x1="19" y1="19" x2="19" y2="5"/></svg><span>Escala</span></a>
+        <a href="../perguntas.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 1 1 4.6 2.2c-.9.6-1.5 1.1-1.5 2.3"/><circle cx="12" cy="17.3" r="0.75" fill="currentColor" stroke="none"/></svg><span>Perguntas</span></a>
+        <a href="../apresentacao.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6.3v11.4l9.5-5.7z"/></svg><span>Apresentação</span></a>
+        <a href="index.html" class="is-active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><line x1="9.5" y1="12.5" x2="14.5" y2="12.5"/><line x1="9.5" y1="16" x2="14.5" y2="16"/></svg><span>Blog</span></a>
+        <a href="../squad.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg><span>Sobre o squad</span></a>
+        <a class="btn btn--primary" href="../testar.html">Testar a Iara</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section">
+      <div class="container">
+        <header class="post-header reveal">
+          <span class="signal signal--paths animate" aria-hidden="true"><span></span><span></span><span></span></span>
+          <h1>O bug do 'talvez'</h1>
+          <p class="post-meta">Diário de desenvolvimento · Squad Aura</p>
+        </header>
+
+        <article class="prose reveal" style="margin-top: clamp(2rem, 5vw, 3.5rem);">
+          <p class="prose-lead">Num teste comum, a Iara pediu uma confirmação. A pessoa do outro lado respondeu só uma palavra: "talvez".</p>
+
+          <p>O sistema simplesmente parou de saber o que fazer. Não caiu, nada tão dramático assim. Travou de um jeito mais chato: como não sabia se "talvez" contava como sim ou como não, fez a única coisa que sabia fazer, que era repetir a pergunta. A pessoa respondeu "talvez" de novo. A pergunta voltou de novo. No grupo do squad, alguém mandou um print da conversa rodando sozinha, tipo disco pulando, só com um "kkkk isso não vai parar" de legenda.</p>
+
+          <figure class="photo-slot">
+            <div class="photo-slot-frame">
+              <div class="photo-slot-placeholder" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                <span>Foto da equipe aqui</span>
+              </div>
+              <img class="photo-slot-img" src="../assets/img/foto-erro.jpg" alt="Tela de terminal cheia de erros em vermelho, com a equipe trabalhando ao fundo">
+            </div>
+            <figcaption class="photo-slot-caption">A tela cheia de erros — e a equipe investigando junto.</figcaption>
+          </figure>
+
+          <p>A primeira vontade foi resolver rápido. Mapear "talvez" pra "não" e seguir em frente. Cinco minutos, uma linha de código. Mas a gente segurou a mão ali. Antes de mexer em qualquer coisa, queria entender <em>por que</em> aquilo estava acontecendo.</p>
+
+          <h2>A investigação</h2>
+
+          <p>A causa não estava na palavra "talvez" em si. Estava numa suposição que a gente tinha feito sem perceber: a de que pergunta fechada recebe resposta fechada. O fluxo de confirmação foi desenhado com duas saídas, sim ou não, porque foi assim que a gente imaginou a conversa enquanto programava.</p>
+
+          <p>Só que gente de verdade não conversa assim. Gente de verdade responde com dúvida. Com pergunta de volta. Com um "depende" jogado ali no meio. Se a gente tivesse resolvido só o "talvez", vinha o "sei lá" duas mensagens depois e derrubava tudo de novo. Daí vinha o "acho que sim". O "hmm". A lista de palavras que não são nem sim nem não é enorme, e tratar uma por uma ia ser tipo enxugar gelo pra sempre.</p>
+
+          <blockquote>O problema não era a palavra "talvez". Era esperar que as pessoas respondessem como máquina.</blockquote>
+
+          <h2>A correção</h2>
+
+          <p>Com a causa clara, a correção acabou saindo maior do que a gente esperava. Hoje, quando uma resposta não é claramente sim nem não, o sistema primeiro olha o que já foi dito na conversa. Na maioria das vezes isso já resolve sozinho. Se ainda não der pra decidir, a Iara pergunta de novo, só que reformulando, em vez de repetir a mesma frase feito disco arranhado.</p>
+
+          <p>E se depois de duas tentativas a dúvida continuar, entra um atendente humano. É esse o combinado: ninguém fica preso num loop com robô.</p>
+
+          <p>A gente passou semanas ensinando a Iara a reconhecer os cinco níveis do Inaf, tabela de descritores, casos-âncora, aquilo tudo. E quase esqueceu de ensinar a coisa mais óbvia: que ninguém, nem a avó, nem a gente mesmo, fala só em sim ou não o tempo todo. Ainda tem uma lista de palavras estranhas testadas depois daquela noite ("sei lá", "bora ver", "pode ser que sim"), mas isso já é assunto pra outro post. Por hoje ficamos por aqui.</p>
+        </article>
+
+        <nav class="post-nav reveal" aria-label="Navegação entre posts">
+          <a href="index.html">← Todos os posts</a>
+          <a href="post-privacidade.html">Próximo: Por que a Iara esquece você →</a>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="3" y="18" width="7" height="11" rx="2" fill="#E0A47C"/>
+            <rect x="12.5" y="11" width="7" height="18" rx="2" fill="#E3C56A"/>
+            <rect x="22" y="3" width="7" height="26" rx="2" fill="#5FBDB0"/>
+          </svg>
+          <span class="brand-name">Iara</span>
+        </a>
+        <p>Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.</p>
+      </div>
+      <div class="footer-col">
+        <h4>O projeto</h4>
+        <nav aria-label="Páginas do projeto">
+          <a href="../como-funciona.html">Como funciona</a>
+          <a href="../seguranca.html">Segurança</a>
+          <a href="../escala.html">Escala</a>
+          <a href="../perguntas.html">Perguntas frequentes</a>
+          <a href="../apresentacao.html">Apresentação</a>
+          <a href="index.html">Blog</a>
+          <a href="../squad.html">Sobre o squad</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Experimente</h4>
+        <nav aria-label="Links para testar">
+          <a href="../testar.html">Testar a Iara</a>
+          <a href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">Bot no Telegram</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Redes sociais</h4>
+        <nav aria-label="Redes sociais">
+          <a href="https://www.youtube.com/@ProjetoIaraAura" target="_blank" rel="noopener noreferrer">Canal no YouTube</a>
+          <a href="https://www.instagram.com/projetoiara.tech/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <p class="footer-credit">Projeto desenvolvido para o Desafio dos Dados 2026, promovido pela Fundação Telefônica Vivo.</p>
+      <p>Squad Aura · Desafio dos Dados 2026 · E.E.E.B. João XXIII</p>
+      <p>ODS 9 · ODS 10 · Pacto Digital Global da ONU</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

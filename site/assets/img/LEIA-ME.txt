@@ -1,0 +1,38 @@
+Arquivos de imagem esperados nesta pasta.
+
+JÁ ESTÃO AQUI (nada a fazer):
+  logo-iara.png
+  painel-dados.png
+  painel-guiado-intermediario.png
+  painel-card-mascarado.png
+  foto-erro.jpg            → já entregue. blog/post-talvez.html, no trecho
+                              que descreve a descoberta do bug do "talvez".
+                              Tela de terminal cheia de erros em vermelho,
+                              com a equipe trabalhando ao fundo.
+  foto-trabalho.jpg        → já entregue. Foto de capa do blog
+                              (blog/index.html). Equipe trabalhando em
+                              conjunto, cada um numa frente diferente do
+                              projeto.
+
+Essas 2 fotos são AUTOMÁTICAS, igual a logo: não precisa editar nenhum HTML.
+Enquanto o arquivo não existir, aparece um placeholder quente (gradiente
+bege/creme, ícone de câmera, texto "Foto da equipe aqui") no formato exato
+que a foto real vai ocupar. Assim que o arquivo for salvo com o nome certo
+nesta pasta, ele substitui o placeholder sozinho.
+
+Formato recomendado: JPG, orientação horizontal, pelo menos 1200px de
+largura (a foto de post fica num quadro 3:2, a de capa num banner 21:9,
+então fotos bem verticais vão cortar bastante nas bordas com object-fit:cover).
+
+---
+
+Para referência, os prints do painel já colocados usam um padrão diferente
+(placeholder roxo, troca manual de HTML) porque foram plugados antes de
+existir o mecanismo automático. Se precisar trocar algum desses prints por
+uma versão mais nova, edite direto o atributo src da tag <img> já existente
+em como-funciona.html / seguranca.html — não precisa mexer em mais nada.
+
+Obs.: as barras de sinal animadas (as 3 barrinhas coloridas) continuam
+aparecendo em vários pontos do site como elemento decorativo — isso é
+intencional, elas não são mais o logo principal, mas seguem representando
+os 3 caminhos de atendimento.

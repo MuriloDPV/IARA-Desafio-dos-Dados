@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como funciona — Iara</title>
+  <meta name="description" content="Duas camadas de IA em paralelo, uma terceira de reserva e um painel em tempo real: a arquitetura por trás da Iara.">
+  <link rel="icon" href="assets/img/logo-iara.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Iara — página inicial">
+        <img class="brand-logo" src="assets/img/logo-iara.png" alt="Iara">
+        <span class="brand-name">Iara</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="como-funciona.html" class="is-active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 4 12l5 6"/><path d="M15 6l5 6-5 6"/></svg><span>Como funciona</span></a>
+        <a href="seguranca.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança</span></a>
+        <a href="escala.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="13"/><line x1="12" y1="19" x2="12" y2="9"/><line x1="19" y1="19" x2="19" y2="5"/></svg><span>Escala</span></a>
+        <a href="perguntas.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 1 1 4.6 2.2c-.9.6-1.5 1.1-1.5 2.3"/><circle cx="12" cy="17.3" r="0.75" fill="currentColor" stroke="none"/></svg><span>Perguntas</span></a>
+        <a href="apresentacao.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6.3v11.4l9.5-5.7z"/></svg><span>Apresentação</span></a>
+        <a href="blog/index.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><line x1="9.5" y1="12.5" x2="14.5" y2="12.5"/><line x1="9.5" y1="16" x2="14.5" y2="16"/></svg><span>Blog</span></a>
+        <a href="squad.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg><span>Sobre o squad</span></a>
+        <a class="btn btn--primary" href="testar.html">Testar a Iara</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">
+          <span class="signal signal--paths" aria-hidden="true"><span></span><span></span><span></span></span>
+          Arquitetura
+        </span>
+        <h1>Como a Iara funciona</h1>
+        <p class="lead">Duas camadas de IA analisam cada mensagem em paralelo. Uma terceira entra só quando a conversa foge do roteiro. E um painel mostra tudo acontecendo, em tempo real.</p>
+      </div>
+    </section>
+
+    <!-- ============ PIPELINE ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">O caminho de uma mensagem</span>
+          <h2>Da mensagem à resposta</h2>
+          <p>Cada mensagem que chega passa por este fluxo — em segundos.</p>
+        </div>
+        <div class="pipeline reveal">
+          <div class="pipe-row">
+            <div class="pipe-box">
+              <strong>Mensagem chega</strong>
+              <small>texto ou áudio, pelo Telegram</small>
+            </div>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">↓</div>
+          <div class="pipe-row">
+            <div class="pipe-box">
+              <strong>Se for áudio: <code>gpt-4o-mini-transcribe</code></strong>
+              <small>transcreve antes de qualquer análise — o sistema nunca processa áudio bruto</small>
+            </div>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">↓</div>
+          <div class="pipe-row">
+            <div class="pipe-box pipe-box--accent">
+              <strong><code>intencao.py</code></strong>
+              <small>descobre <strong>o que</strong> a pessoa quer</small>
+            </div>
+            <div class="pipe-box pipe-box--accent">
+              <strong><code>classificador.py</code></strong>
+              <small>decide <strong>como</strong> a pessoa fala</small>
+            </div>
+          </div>
+          <div class="pipe-caption">As duas análises rodam em paralelo, sobre a mesma mensagem.</div>
+          <div class="pipe-arrow" aria-hidden="true">↓</div>
+          <div class="pipe-row">
+            <div class="pipe-box">
+              <strong>Resposta no caminho certo</strong>
+              <small>Guiado · Intermediário · Direto</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AS CAMADAS ============ -->
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">As camadas</span>
+          <h2>Quatro peças, cada uma com um só trabalho</h2>
+        </div>
+        <div class="layer-grid">
+          <article class="layer-card reveal">
+            <span class="layer-role">Camada 1 · Intenção</span>
+            <h3><code>intencao.py</code> <span class="layer-model">gpt-5.4-nano</span></h3>
+            <p>Descobre <strong>o que</strong> a pessoa quer, entre 4 tarefas: trocar de plano, consultar fatura, reclamar de sinal ou cancelar linha.</p>
+            <p>Lê a mensagem inteira — não depende de onde o pedido aparece na frase. "Oi, tudo bem? Então, é que minha conta veio estranha" é entendido do mesmo jeito que "consultar fatura".</p>
+          </article>
+          <article class="layer-card reveal" style="--d: 0.1s">
+            <span class="layer-role">Camada 2 · Letramento</span>
+            <h3><code>classificador.py</code> <span class="layer-model">gpt-5.4-nano</span></h3>
+            <p>Decide <strong>como</strong> a pessoa fala, com base nos 5 níveis oficiais do Inaf. É essa leitura que escolhe o caminho da conversa — Guiado, Intermediário ou Direto.</p>
+          </article>
+          <article class="layer-card reveal" style="--d: 0.2s">
+            <span class="layer-role">Camada 3 · Reserva</span>
+            <h3><code>interprete.py</code></h3>
+            <p>Entra só quando a resposta foge do esperado. Se a pessoa responde uma pergunta — "qual o mais barato?" — no meio de uma confirmação, o interprete entende o desvio em vez de deixar a conversa travar.</p>
+          </article>
+          <article class="layer-card reveal" style="--d: 0.3s">
+            <span class="layer-role">Porta de entrada · Áudio</span>
+            <h3><code>gpt-4o-mini-transcribe</code></h3>
+            <p>Transcreve mensagens de áudio antes de qualquer análise. Quem prefere falar a escrever — e muita gente prefere — usa a Iara do mesmo jeito.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIAGRAMA DO FLUXO TÉCNICO ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">O fluxo, visualmente</span>
+          <h2>O caminho de uma mensagem, camada por camada</h2>
+        </div>
+
+        <div class="flow-diagram reveal">
+          <svg class="flow-diagram-desktop" viewBox="0 0 920 460" role="img" aria-labelledby="flow-d-title flow-d-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="flow-d-title">Diagrama do fluxo técnico da Iara</title>
+            <desc id="flow-d-desc">Mensagem do usuário segue para intencao.py e classificador.py em paralelo, que convergem na definição do caminho da conversa. O interprete.py entra apenas quando a resposta é ambígua, antes da resposta final adaptada ao nível de letramento.</desc>
+            <defs>
+              <marker id="arrow-roxo-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#5B21B6"/>
+              </marker>
+              <marker id="arrow-ambar-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#B8860B"/>
+              </marker>
+              <filter id="soft-shadow-d" x="-20%" y="-30%" width="140%" height="160%">
+                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#3B1568" flood-opacity="0.15"/>
+              </filter>
+            </defs>
+
+            <!-- Box 1: Mensagem do usuário -->
+            <rect x="340" y="20" width="240" height="56" rx="14" fill="#FFFFFF" stroke="#5B21B6" stroke-opacity="0.35" stroke-width="1.5" filter="url(#soft-shadow-d)"/>
+            <text x="460" y="53" text-anchor="middle" class="flow-box-title" font-size="16" fill="#1C1B1F">Mensagem do usuário</text>
+
+            <!-- split -->
+            <line x1="460" y1="76" x2="460" y2="96" stroke="#5B21B6" stroke-width="2.2"/>
+            <circle cx="460" cy="96" r="4" fill="#5B21B6"/>
+            <path d="M460,96 L250,110" stroke="#5B21B6" stroke-width="2" fill="none" marker-end="url(#arrow-roxo-d)"/>
+            <path d="M460,96 L670,110" stroke="#5B21B6" stroke-width="2" fill="none" marker-end="url(#arrow-roxo-d)"/>
+            <text x="460" y="90" text-anchor="middle" class="flow-caption-text" font-size="11.5" fill="#6E6B63">em paralelo, sobre a mesma mensagem</text>
+
+            <!-- Box 2: intencao.py -->
+            <rect x="90" y="110" width="320" height="100" rx="14" fill="#E3F0EE" stroke="#0F766E" stroke-width="2" filter="url(#soft-shadow-d)"/>
+            <text x="250" y="152" text-anchor="middle" class="flow-box-code" font-size="16" fill="#0F766E">intencao.py</text>
+            <text x="250" y="176" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#3f5f5b">O QUE a pessoa quer</text>
+
+            <!-- Box 3: classificador.py -->
+            <rect x="510" y="110" width="320" height="100" rx="14" fill="#F9EFE7" stroke="#C2703D" stroke-width="2" filter="url(#soft-shadow-d)"/>
+            <text x="670" y="152" text-anchor="middle" class="flow-box-code" font-size="16" fill="#C2703D">classificador.py</text>
+            <text x="670" y="176" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#6e5847">COMO a pessoa fala</text>
+
+            <!-- converge -->
+            <path d="M250,210 L460,256" stroke="#5B21B6" stroke-width="2" fill="none" marker-end="url(#arrow-roxo-d)"/>
+            <path d="M670,210 L460,256" stroke="#5B21B6" stroke-width="2" fill="none" marker-end="url(#arrow-roxo-d)"/>
+
+            <!-- Box 4: define caminho -->
+            <rect x="280" y="256" width="360" height="72" rx="14" fill="#F3EFFA" stroke="#5B21B6" stroke-width="2" filter="url(#soft-shadow-d)"/>
+            <text x="460" y="286" text-anchor="middle" class="flow-box-title" font-size="15" fill="#3B1568">Define o caminho</text>
+            <text x="460" y="308" text-anchor="middle" class="flow-box-sub" font-size="13" font-weight="600" fill="#3B1568">Guiado · Intermediário · Direto</text>
+
+            <!-- main arrow to final -->
+            <line x1="460" y1="328" x2="460" y2="358" stroke="#5B21B6" stroke-width="2.2" marker-end="url(#arrow-roxo-d)"/>
+
+            <!-- Box 5: resposta final -->
+            <rect x="280" y="358" width="360" height="72" rx="14" fill="#FFFFFF" stroke="#3B1568" stroke-width="2.2" filter="url(#soft-shadow-d)"/>
+            <text x="460" y="388" text-anchor="middle" class="flow-box-title" font-size="15" fill="#1C1B1F">Resposta adaptada</text>
+            <text x="460" y="409" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#6E6B63">ao nível de letramento</text>
+
+            <!-- Box 6: interprete.py (ramificação opcional) -->
+            <path d="M640,292 L698,300" stroke="#B8860B" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#arrow-ambar-d)"/>
+            <rect x="700" y="250" width="190" height="100" rx="14" fill="#F7F1DE" stroke="#B8860B" stroke-width="2" stroke-dasharray="6 4" filter="url(#soft-shadow-d)"/>
+            <text x="795" y="284" text-anchor="middle" class="flow-box-code" font-size="14" fill="#8a6508">interprete.py</text>
+            <text x="795" y="304" text-anchor="middle" class="flow-box-sub" font-size="11.5" fill="#6e5c30">só se a resposta</text>
+            <text x="795" y="319" text-anchor="middle" class="flow-box-sub" font-size="11.5" fill="#6e5c30">for ambígua</text>
+            <path d="M718,350 C 675,382 530,362 462,344" stroke="#B8860B" stroke-width="1.8" stroke-dasharray="2 5" fill="none" marker-end="url(#arrow-ambar-d)"/>
+          </svg>
+
+          <svg class="flow-diagram-mobile" viewBox="0 0 360 630" role="img" aria-labelledby="flow-m-title flow-m-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="flow-m-title">Diagrama do fluxo técnico da Iara</title>
+            <desc id="flow-m-desc">Mensagem do usuário segue para intencao.py e classificador.py em paralelo, que convergem na definição do caminho da conversa. O interprete.py entra apenas quando a resposta é ambígua, antes da resposta final adaptada ao nível de letramento.</desc>
+            <defs>
+              <marker id="arrow-roxo-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#5B21B6"/>
+              </marker>
+              <marker id="arrow-ambar-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#B8860B"/>
+              </marker>
+              <filter id="soft-shadow-m" x="-20%" y="-30%" width="140%" height="160%">
+                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#3B1568" flood-opacity="0.15"/>
+              </filter>
+            </defs>
+
+            <!-- Box 1 -->
+            <rect x="20" y="16" width="320" height="56" rx="12" fill="#FFFFFF" stroke="#5B21B6" stroke-opacity="0.35" stroke-width="1.5" filter="url(#soft-shadow-m)"/>
+            <text x="180" y="49" text-anchor="middle" class="flow-box-title" font-size="16" fill="#1C1B1F">Mensagem do usuário</text>
+
+            <line x1="180" y1="72" x2="180" y2="140" stroke="#5B21B6" stroke-width="2.2" marker-end="url(#arrow-roxo-m)"/>
+            <text x="180" y="104" text-anchor="middle" class="flow-caption-text" font-size="11.5" fill="#6E6B63">as duas análises rodam</text>
+            <text x="180" y="118" text-anchor="middle" class="flow-caption-text" font-size="11.5" fill="#6E6B63">em paralelo</text>
+
+            <!-- Box 2 -->
+            <rect x="20" y="140" width="320" height="84" rx="12" fill="#E3F0EE" stroke="#0F766E" stroke-width="2" filter="url(#soft-shadow-m)"/>
+            <text x="180" y="172" text-anchor="middle" class="flow-box-code" font-size="16" fill="#0F766E">intencao.py</text>
+            <text x="180" y="196" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#3f5f5b">O QUE a pessoa quer</text>
+
+            <line x1="180" y1="224" x2="180" y2="240" stroke="#5B21B6" stroke-width="2.2" marker-end="url(#arrow-roxo-m)"/>
+
+            <!-- Box 3 -->
+            <rect x="20" y="240" width="320" height="84" rx="12" fill="#F9EFE7" stroke="#C2703D" stroke-width="2" filter="url(#soft-shadow-m)"/>
+            <text x="180" y="272" text-anchor="middle" class="flow-box-code" font-size="16" fill="#C2703D">classificador.py</text>
+            <text x="180" y="296" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#6e5847">COMO a pessoa fala</text>
+
+            <line x1="180" y1="324" x2="180" y2="340" stroke="#5B21B6" stroke-width="2.2" marker-end="url(#arrow-roxo-m)"/>
+
+            <!-- Box 4 -->
+            <rect x="20" y="340" width="320" height="72" rx="12" fill="#F3EFFA" stroke="#5B21B6" stroke-width="2" filter="url(#soft-shadow-m)"/>
+            <text x="180" y="370" text-anchor="middle" class="flow-box-title" font-size="15" fill="#3B1568">Define o caminho</text>
+            <text x="180" y="392" text-anchor="middle" class="flow-box-sub" font-size="12.5" font-weight="600" fill="#3B1568">Guiado · Intermediário · Direto</text>
+
+            <!-- default path bypassing interprete -->
+            <line x1="110" y1="412" x2="110" y2="530" stroke="#5B21B6" stroke-width="2.2" marker-end="url(#arrow-roxo-m)"/>
+
+            <!-- branch: interprete.py -->
+            <path d="M250,412 L275,428" stroke="#B8860B" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#arrow-ambar-m)"/>
+            <rect x="210" y="428" width="130" height="82" rx="10" fill="#F7F1DE" stroke="#B8860B" stroke-width="2" stroke-dasharray="6 4" filter="url(#soft-shadow-m)"/>
+            <text x="275" y="452" text-anchor="middle" class="flow-box-code" font-size="12.5" fill="#8a6508">interprete.py</text>
+            <text x="275" y="469" text-anchor="middle" class="flow-box-sub" font-size="10.5" fill="#6e5c30">só se a resposta</text>
+            <text x="275" y="482" text-anchor="middle" class="flow-box-sub" font-size="10.5" fill="#6e5c30">for ambígua</text>
+            <path d="M275,510 C 275,522 262,527 251,531" stroke="#B8860B" stroke-width="1.8" stroke-dasharray="2 5" fill="none" marker-end="url(#arrow-ambar-m)"/>
+
+            <!-- Box 5 -->
+            <rect x="20" y="530" width="320" height="76" rx="14" fill="#FFFFFF" stroke="#3B1568" stroke-width="2.2" filter="url(#soft-shadow-m)"/>
+            <text x="180" y="562" text-anchor="middle" class="flow-box-title" font-size="15" fill="#1C1B1F">Resposta adaptada</text>
+            <text x="180" y="584" text-anchor="middle" class="flow-box-sub" font-size="13" fill="#6E6B63">ao nível de letramento</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESCALA INAF ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">A régua</span>
+          <h2>Os 5 níveis oficiais do Inaf</h2>
+          <p>O Indicador de Alfabetismo Funcional (Inaf) é a referência nacional para medir alfabetismo. O <code>classificador.py</code> usa esses mesmos 5 níveis para ler cada mensagem.</p>
+        </div>
+        <div class="inaf-scale reveal">
+          <div class="inaf-step">
+            <div class="inaf-fill"></div>
+            <strong>Analfabeto</strong>
+          </div>
+          <div class="inaf-step">
+            <div class="inaf-fill"></div>
+            <strong>Rudimentar</strong>
+          </div>
+          <div class="inaf-step">
+            <div class="inaf-fill"></div>
+            <strong>Elementar</strong>
+          </div>
+          <div class="inaf-step">
+            <div class="inaf-fill"></div>
+            <strong>Intermediário</strong>
+          </div>
+          <div class="inaf-step">
+            <div class="inaf-fill"></div>
+            <strong>Proficiente</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ O PAINEL ============ -->
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">O painel</span>
+          <h2>Tudo visível, em tempo real</h2>
+          <p>Um painel em <strong>FastAPI + SQLite em modo WAL</strong> acompanha cada atendimento no momento em que acontece: nível Inaf, caminho, tarefa, taxa de resolução sem atendente humano e tempo médio por nível.</p>
+        </div>
+
+        <div class="frame frame--browser reveal" style="max-width: 880px; margin-inline: auto;">
+          <div class="frame-titlebar" aria-hidden="true">
+            <span class="frame-dots"><span></span><span></span><span></span></span>
+            <span class="frame-url">painel da Iara — visão geral dos atendimentos</span>
+          </div>
+          <div class="frame-screen">
+            <img src="assets/img/painel-dados.png" alt="Print do painel da Iara mostrando os atendimentos em tempo real" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="section-head reveal" style="margin-top: clamp(3rem, 7vw, 5rem);">
+          <h3>Até a densidade dos cards conta a história</h3>
+          <p style="color: var(--texto-sec);">Os próprios cards do painel têm densidade visual diferente por caminho — o Guiado é mais espaçoso, o Direto mais compacto. É um lembrete permanente para quem opera o sistema: <strong style="color: var(--texto);">"mais devagar" é mais cuidado, não pior atendimento.</strong></p>
+        </div>
+
+        <div class="frame frame--browser reveal" style="max-width: 880px; margin-inline: auto;">
+          <div class="frame-titlebar" aria-hidden="true">
+            <span class="frame-dots"><span></span><span></span><span></span></span>
+            <span class="frame-url">painel da Iara — cards Guiado e Intermediário lado a lado</span>
+          </div>
+          <div class="frame-screen" style="aspect-ratio: 1194 / 259;">
+            <img src="assets/img/painel-guiado-intermediario.png" alt="Cards Guiado e Intermediário lado a lado no painel da Iara" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;">
+          </div>
+        </div>
+        <p class="pipe-caption reveal" style="margin-inline: auto;">Os cards Guiado e Intermediário lado a lado no painel — a diferença de densidade visual entre os caminhos é intencional.</p>
+      </div>
+    </section>
+
+    <!-- ============ NÚMEROS DE VALIDAÇÃO ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Validação</span>
+          <h2>Números de validação</h2>
+        </div>
+        <div class="stats-grid stats-grid--tight">
+          <div class="stat stat--sm reveal">
+            <div class="stat-number"><span data-count="10">10</span><sup>+</sup></div>
+            <p class="stat-label">suítes automatizadas de teste</p>
+          </div>
+          <div class="stat stat--sm reveal" style="--d: 0.1s">
+            <div class="stat-number"><span data-count="6">6</span></div>
+            <p class="stat-label">casos-âncora da escala do Inaf</p>
+          </div>
+          <div class="stat stat--sm reveal" style="--d: 0.2s">
+            <div class="stat-number"><span data-count="19">19</span></div>
+            <p class="stat-label">variações de confirmação testadas</p>
+          </div>
+          <div class="stat stat--sm reveal" style="--d: 0.3s">
+            <div class="stat-number"><span data-count="7">7</span></div>
+            <p class="stat-label">personas cobrindo os 5 níveis oficiais</p>
+          </div>
+        </div>
+        <p class="note-transparencia reveal">Não é um instrumento de diagnóstico clínico — é um protótipo validado com rigor pro que ele se propõe a fazer. A Iara não aplica o teste oficial do Inaf, que é presencial e cronometrado: o que ela faz é uma aproximação, baseada nos descritores de cada nível, pensada pra funcionar dentro de uma conversa real.</p>
+      </div>
+    </section>
+
+    <!-- ============ QUANTO CUSTA ============ -->
+    <section class="section section--tint" id="custo">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Transparência</span>
+          <h2>Quanto custa a Iara?</h2>
+        </div>
+
+        <div class="cost-card reveal">
+          <div class="cost-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr><th>Item</th><th>Como é cobrado</th><th>Preço público</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Telegram</td><td>Uso do bot</td><td>Gratuito</td></tr>
+                <tr><td>Classificação (intenção + nível)</td><td>gpt-5.4-nano, por token</td><td>$0,20/milhão tokens entrada · $1,25/milhão saída</td></tr>
+                <tr><td>Transcrição de áudio</td><td>gpt-4o-mini-transcribe, por minuto</td><td>~$0,003/minuto</td></tr>
+                <tr><td>Servidor (VPS)</td><td>Mensal, fixo</td><td>R$ 52,99/mês (Hostinger, plano KVM 1, contratação mês a mês)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cost-highlight">
+            <div class="cost-highlight-number">R$ 0,06</div>
+            <p class="cost-highlight-label">por atendimento — simulação de 1.000 atendimentos/mês</p>
+          </div>
+
+          <p class="cost-calc">Simulação: 1.000 atendimentos/mês, com 4 mensagens de texto em média cada e 20% incluindo 1 áudio de ~15s. A classificação de intenção e nível de letramento roda <strong>uma única vez por atendimento</strong> — na primeira mensagem, não a cada mensagem trocada — o que dá cerca de 2.140 tokens de IA por atendimento, medidos direto dos prompts do sistema. Isso soma US$ 0,611 (≈ R$ 3,14) em IA por mês para os 1.000 atendimentos. O servidor (R$ 52,99/mês ÷ R$ 5,14 = US$ 10,31) somado à IA dá US$ 10,92/mês — <strong>R$ 56,13/mês</strong> — R$ 0,06 por atendimento (câmbio R$ 5,14, 21/08/2026).</p>
+
+          <p class="note-transparencia" style="margin-top: 1.6rem;">Estes valores são uma estimativa baseada nos preços públicos da OpenAI e no tamanho real dos prompts do sistema — não representam uma fatura paga. O protótipo foi desenvolvido usando créditos de teste da conta da equipe, não uma assinatura de produção.</p>
+
+          <p class="cost-decisao">A arquitetura usa o menor modelo da geração atual (gpt-5.4-nano) nas duas classificações que abrem cada atendimento, reservando modelos maiores apenas se o projeto crescer para tarefas que exigirem mais raciocínio — reduzindo o custo por atendimento sem abrir mão da precisão.</p>
+
+          <p class="cost-calc" style="margin-top: 1rem;">A simulação acima usa o preço cheio, sem descontos. Na prática, o custo tende a ser ainda menor: como os prompts de sistema de <code>intencao.py</code> e <code>classificador.py</code> são fixos e reaproveitados em toda chamada, eles são elegíveis ao desconto de cache de prompt da OpenAI — até 90% mais barato na parte repetida.</p>
+
+          <p class="cost-calc" style="margin-top: 1rem;">Em escala muito maior que a testada aqui, existe outro caminho: hospedar um modelo de código aberto (como Llama ou Mistral) no próprio servidor, trocando custo por token por custo fixo de infraestrutura. Não foi o caminho escolhido para este protótipo — que prioriza simplicidade e rapidez de desenvolvimento —, mas é uma opção real se o volume de atendimentos crescer o suficiente para justificar o investimento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section cta-band">
+      <div class="container reveal">
+        <h2>A melhor explicação é uma conversa</h2>
+        <div class="hero-actions">
+          <div class="telegram-actions">
+            <a class="btn btn--primary btn--xl" href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+              Abrir no app Telegram
+            </a>
+            <a class="btn btn--ghost btn--xl" href="https://web.telegram.org/k/#@projetoIara_bot" target="_blank" rel="noopener">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 6h16v2H4V6zm0 12v-8h16v8H4z"/></svg>
+              Abrir no navegador
+            </a>
+          </div>
+          <a class="btn btn--ghost btn--xl" href="seguranca.html">Ver como ela se protege</a>
+        </div>
+        <p class="ai-disclaimer">A Iara é uma inteligência artificial e, como qualquer outra IA, pode cometer erros.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="3" y="18" width="7" height="11" rx="2" fill="#E0A47C"/>
+            <rect x="12.5" y="11" width="7" height="18" rx="2" fill="#E3C56A"/>
+            <rect x="22" y="3" width="7" height="26" rx="2" fill="#5FBDB0"/>
+          </svg>
+          <span class="brand-name">Iara</span>
+        </a>
+        <p>Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.</p>
+      </div>
+      <div class="footer-col">
+        <h4>O projeto</h4>
+        <nav aria-label="Páginas do projeto">
+          <a href="como-funciona.html">Como funciona</a>
+          <a href="seguranca.html">Segurança</a>
+          <a href="escala.html">Escala</a>
+          <a href="perguntas.html">Perguntas frequentes</a>
+          <a href="apresentacao.html">Apresentação</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="squad.html">Sobre o squad</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Experimente</h4>
+        <nav aria-label="Links para testar">
+          <a href="testar.html">Testar a Iara</a>
+          <a href="https://t.me/projetoIara_bot" target="_blank" rel="noopener">Bot no Telegram</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Redes sociais</h4>
+        <nav aria-label="Redes sociais">
+          <a href="https://www.youtube.com/@ProjetoIaraAura" target="_blank" rel="noopener noreferrer">Canal no YouTube</a>
+          <a href="https://www.instagram.com/projetoiara.tech/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <p class="footer-credit">Projeto desenvolvido para o Desafio dos Dados 2026, promovido pela Fundação Telefônica Vivo.</p>
+      <p>Squad Aura · Desafio dos Dados 2026 · E.E.E.B. João XXIII</p>
+      <p>ODS 9 · ODS 10 · Pacto Digital Global da ONU</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
