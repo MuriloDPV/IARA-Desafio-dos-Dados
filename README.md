@@ -5,7 +5,7 @@
 
 **Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.**
 
-### [projetoiara.tech](https://projetoiara.tech)
+### [Abrir o site do projeto](https://murilodpv.github.io/IARA-Desafio-dos-Dados/)
 
 Squad Aura · Desafio dos Dados 2026 · Fundação Telefônica Vivo
 
