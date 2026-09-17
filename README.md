@@ -3,11 +3,11 @@
 
 # Iara
 
-**Motor de letramento digital para atendimento automatizado**
+**Uma assistente que adapta o atendimento ao nível de letramento digital de cada pessoa — sem nunca perguntar isso diretamente.**
 
-Um bot que descobre com quem está falando e muda o jeito de atender — em vez de tratar todo mundo com o mesmo roteiro.
+### [projetoiara.tech](https://projetoiara.tech)
 
-Protótipo do Desafio dos Dados 2026 · Fundação Telefônica Vivo
+Squad Aura · Desafio dos Dados 2026 · Fundação Telefônica Vivo
 
 </div>
 
@@ -17,7 +17,7 @@ Protótipo do Desafio dos Dados 2026 · Fundação Telefônica Vivo
 
 Atendimento automático trata todo mundo igual. Quem tem facilidade com tecnologia se irrita com o excesso de passos; quem não tem se perde no meio do caminho e desiste — ou cai no atendimento humano, que custa caro e demora.
 
-A barreira não é falta de acesso. É letramento digital: a capacidade de entender e agir sobre o que a tela está pedindo.
+A barreira não é falta de acesso à internet. É letramento digital: a capacidade de entender e agir sobre o que a tela está pedindo.
 
 ## A ideia
 
@@ -29,7 +29,7 @@ A cada mensagem, a Iara estima o nível de letramento digital de quem está do o
 | Elementar | **Intermediário** | Meio-termo entre guiado e direto |
 | Intermediário / Proficiente | **Direto** | Resolve em uma mensagem |
 
-> **Nenhum rótulo fica gravado na pessoa.** O nível é recalculado a cada interação, nunca fixado num perfil. Alguém que estava confuso ontem não carrega esse rótulo hoje.
+> **Nenhum rótulo fica gravado na pessoa.** O nível é recalculado a cada interação, nunca fixado num perfil. Quem estava confuso ontem não carrega esse rótulo hoje.
 
 ## O que ele faz na prática
 
@@ -45,7 +45,7 @@ Dentro de uma tarefa, desvio de conversa não vira "confusão" automaticamente:
 
 ## O painel
 
-Enquanto a conversa acontece, um painel web mostra o nível estimado, a confiança do classificador e o caminho escolhido — é o que torna a decisão auditável em vez de mágica.
+Enquanto a conversa acontece, um painel web mostra o nível estimado, a confiança do classificador e o caminho escolhido. É o que torna a decisão auditável em vez de mágica.
 
 <div align="center">
 <img src="site/assets/img/painel-dados.png" alt="Painel da Iara" width="820">
@@ -56,11 +56,11 @@ Enquanto a conversa acontece, um painel web mostra o nível estimado, a confian�
 <img src="site/assets/img/painel-card-mascarado.png" alt="Dados mascarados no painel" width="400">
 </div>
 
-## Escopo do protótipo
+## Escopo
 
 Quatro tarefas fixas, com dados 100% fictícios: trocar de plano, consultar fatura, reclamação de sinal e cancelar a linha. Fora dessas quatro, o bot admite o limite em vez de adivinhar.
 
-A identificação é simulada — nome e telefone contra uma lista de clientes fictícios, mais um check de quatro dígitos de teatro. Nada aqui toca sistema real de ninguém.
+A identificação é simulada — nome e telefone contra uma lista de clientes fictícios, mais um check de quatro dígitos. Nada aqui toca sistema real de ninguém.
 
 ## Stack
 
@@ -78,13 +78,14 @@ Os testes de fluxo (`teste_troca_tarefa.py`, `teste_reclamacao_cancelamento.py`,
 
 ## Limites
 
-É um protótipo de demonstração, não um produto. Dados fictícios, quatro tarefas, identificação simulada. O que ele prova é o mecanismo: dá para medir letramento digital durante o atendimento e adaptar o caminho sem etiquetar a pessoa.
+Os dados são fictícios e as tarefas são quatro. O que o projeto prova é o mecanismo: dá para medir letramento digital durante o atendimento e adaptar o caminho, sem etiquetar ninguém.
 
 ---
 
 <div align="center">
 
-Construído por **[Murilo Vieira](https://github.com/MuriloDPV)** · **FOX** — automação, IA e software para empresas
+Projeto do **Squad Aura** no Desafio dos Dados 2026.
+Este repositório reúne o código do protótipo, mantido por **[Murilo Vieira](https://github.com/MuriloDPV)** — **FOX**, automação, IA e software para empresas.
 
 *Tecnologia para fazer o bem*
 
