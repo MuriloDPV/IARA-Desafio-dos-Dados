@@ -1,0 +1,38 @@
+# Segredos e configuração local
+.env
+.claude/settings.local.json
+
+# Bancos de dados (produção e teste) — SQLite e arquivos auxiliares
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Ambiente virtual Python
+.venv/
+venv/
+env/
+
+# Bytecode e cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cache de testes
+.pytest_cache/
+.cache/
+
+# Logs
+*.log
+logs/
+
+# Backups e dumps
+*.bak
+*.backup
+*.sql
+
+# Editores / SO
+.DS_Store
+.idea/
+.vscode/

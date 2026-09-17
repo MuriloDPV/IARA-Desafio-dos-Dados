@@ -1,0 +1,7 @@
+{
+  "versao": "1.5",
+  "atualizado_em": "2026-09-15",
+  "mudancas": [
+    "Perguntas sobre 'outros planos no cadastro' (ex: 'só tenho este plano?', 'tenho outro plano em meu nome?') agora recebem resposta fixa e honesta sobre a limitação do protótipo (1 plano por cadastro), em vez de classificação instável que caía, incorretamente, em consulta de fatura"
+  ]
+}

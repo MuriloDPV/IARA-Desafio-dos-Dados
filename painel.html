@@ -1,0 +1,864 @@
+<meta charset="utf-8">
+<title>Iara — Painel ao vivo</title>
+<!-- balão de conversa no roxo da marca; SVG embutido (a demo roda offline) -->
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzVCMjFCNiIvPjxyZWN0IHg9IjYiIHk9IjgiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxMyIgcng9IjMuNSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMSAyMWg2bC02IDV6IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxNC41IiByPSIxLjYiIGZpbGw9IiM1QjIxQjYiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjE0LjUiIHI9IjEuNiIgZmlsbD0iIzVCMjFCNiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMTQuNSIgcj0iMS42IiBmaWxsPSIjNUIyMUI2Ii8+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --ink: #1C1B1F;
+    --muted: #6E6B63;
+    --linha: #E7E4DC;
+    --surface: #FFFFFF;
+    --accent: #5B21B6;
+    --guiado: #C2703D;
+    --inter: #B8860B;
+    --direto: #0F766E;
+    --alerta: #B3261E;
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--body); background: var(--bg); color: var(--ink);
+    margin: 0; padding: 28px 24px 60px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  header h1 {
+    font-family: var(--display); font-weight: 650; color: var(--accent);
+    font-size: 1.9rem; letter-spacing: -0.01em; margin: 0;
+    display: flex; align-items: center; gap: 11px;
+  }
+  header h1 svg { width: 30px; height: 30px; flex: none; }
+  header .sub { color: var(--muted); font-size: .85rem; margin: 6px 0 14px; }
+
+  /* ---- barras de sinal: 1 de 3 = precisa de mais suporte, 3 de 3 = autônomo.
+     Mesmo desenho no badge, na legenda e na marca d'água do card. */
+  .sinal { width: 1.05em; height: auto; flex: none; vertical-align: -.09em; }
+  .sinal rect { fill: currentColor; }
+  .sinal[data-n="1"] rect:nth-child(n+2),
+  .sinal[data-n="2"] rect:nth-child(n+3) { opacity: .34; }
+
+  /* legenda: uma linha só — ícone + rótulo, sem chip preenchido */
+  .legenda { display: flex; gap: 15px; align-items: center; flex-wrap: wrap;
+             margin-bottom: 24px; font-size: .79rem; }
+  .leg { display: inline-flex; align-items: center; gap: 6px;
+         font-weight: 600; }
+  .leg.g { color: var(--guiado); }
+  .leg.i { color: var(--inter); }
+  .leg.d { color: var(--direto); }
+  .leg-hint { color: var(--muted); font-weight: 400; font-size: .73rem; }
+
+  /* ---- abas: duas visões do mesmo polling. Trocar de aba só alterna
+     visibilidade — nada é re-renderizado nem remontado. */
+  .abas { display: flex; gap: 4px; border-bottom: 1px solid var(--linha);
+          margin-bottom: 22px; }
+  .aba {
+    font: inherit; font-size: .85rem; font-weight: 600; color: var(--muted);
+    background: none; border: 0; border-bottom: 2px solid transparent;
+    padding: 9px 15px; margin-bottom: -1px; cursor: pointer;
+    border-radius: 8px 8px 0 0;
+  }
+  .aba:hover { color: var(--ink); background: rgba(91,33,182,.04); }
+  .aba[aria-selected="true"] {
+    color: var(--accent); border-bottom-color: var(--accent);
+    background: rgba(91,33,182,.07);
+  }
+  .aba:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .painel[hidden] { display: none; }
+
+  /* ---- painel agregado: só contagens. Mesmas cores e o
+     mesmo desenho de barras de sinal da legenda e dos badges.
+
+     A aba Dados sai da coluna de leitura (920px): gráfico lado a lado precisa
+     de mais respiro que texto corrido. O desconto de 64px cobre o padding do
+     body e a barra de rolagem, que entra em 100vw mas não na largura útil. */
+  #painel-dados { width: min(1180px, calc(100vw - 64px));
+                  margin-left: 50%; transform: translateX(-50%); }
+  .dash { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  .cartao {
+    background: var(--surface); border: 1px solid var(--linha);
+    border-radius: 16px; padding: 20px 22px;
+    box-shadow: 0 1px 2px rgba(28,27,31,.04);
+  }
+  .dash-full { grid-column: 1 / -1; }
+  /* 6 colunas: 3 roscas (2 cada) numa fileira, 2 blocos de barras (3 cada) na
+     seguinte. Abaixo disso vira 2 colunas e depois empilha. */
+  @media (min-width: 700px) { .dash { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) {
+    .dash { grid-template-columns: repeat(6, 1fr); gap: 18px; }
+    .dash-rosca { grid-column: span 2; }
+    .dash-larga { grid-column: span 3; }
+  }
+  .dash-topo { display: flex; align-items: baseline; gap: 10px;
+               flex-wrap: wrap; }
+  .stats-num { font-family: var(--display); font-weight: 650;
+               font-size: 1.5rem; line-height: 1; }
+  .stats-rotulo { color: var(--muted); font-size: .82rem; }
+  .stats-linha { display: flex; align-items: center; gap: 10px;
+                 margin-bottom: 7px; font-size: .8rem; }
+  .stats-linha:last-child { margin-bottom: 0; }
+  .stats-nome { display: inline-flex; align-items: center; gap: 6px;
+                font-weight: 600; width: 8.6em; flex: none; }
+  .stats-linha.g { color: var(--guiado); }
+  .stats-linha.i { color: var(--inter); }
+  .stats-linha.d { color: var(--direto); }
+  /* trilho neutro, preenchimento na cor do caminho */
+  .stats-trilho { flex: 1; height: 7px; border-radius: 99px;
+                  background: #EFEDE7; overflow: hidden; min-width: 60px; }
+  .stats-fill { display: block; height: 100%; border-radius: 99px;
+                background: currentColor; }
+  /* o número é texto, não pintura: fica na tinta do corpo */
+  .stats-pct { color: var(--ink); font-family: var(--mono);
+               font-size: .78rem; width: 3.4em; text-align: right;
+               flex: none; }
+  .stats-vazio { color: var(--muted); font-size: .85rem; }
+
+  /* cada grupo é um card do dashboard — a separação é o gap da grade */
+  .stats-titulo { font-size: .69rem; font-weight: 600; letter-spacing: .07em;
+                  text-transform: uppercase; color: var(--muted);
+                  margin: 0 0 10px; }
+  .stats-base { text-transform: none; letter-spacing: 0; font-weight: 400; }
+  /* grupo sem caminho próprio: mesmo cinza do card neutro */
+  .stats-linha.n { color: #8A8780; }
+  /* tempo é duração, não fatia: "12 min" não cabe na coluna de "71%" */
+  .stats-tempos .stats-pct { width: 5em; }
+  /* a leitura em uma frase do grupo — abaixo das barras, no tom da legenda */
+  .stats-nota { color: var(--muted); font-size: .74rem; margin: 9px 0 0; }
+  .stats-nota b { color: var(--ink); font-weight: 600; }
+  .encaminhados { color: var(--muted); font-size: .74rem; margin: 9px 0 0;
+                  line-height: 1.6; }
+  .encaminhados-rot { color: var(--ink); font-weight: 600; }
+  .encaminhados .mono { font-size: .74rem; }
+  .encaminhados-toggle { display: block; margin-top: 3px; padding: 0;
+    background: none; border: 0; color: var(--accent); font: inherit;
+    font-weight: 600; cursor: pointer; }
+  .encaminhados-toggle:hover { text-decoration: underline; }
+
+  /* ---- roscas: só pros grupos em que as fatias SÃO um todo. Nível e tempo
+     ficam em barra de propósito — não são partes de 100%.
+     r = 15.9155 faz a circunferência valer 100, então dasharray é o próprio
+     percentual e dashoffset negativo é o quanto já foi consumido. */
+  .rosca-box { position: relative; width: 100%; max-width: 176px;
+               margin: 4px auto 0; }
+  .rosca { display: block; width: 100%; height: auto;
+           transform: rotate(-90deg); }   /* começa no topo, não às 3h */
+  .rosca circle { fill: none; stroke-width: 5.4; }
+  .rosca .trilho { stroke: #EFEDE7; }
+  .rosca .fatia { stroke: currentColor; }
+  .rosca-centro { position: absolute; inset: 0; display: flex;
+                  flex-direction: column; align-items: center;
+                  justify-content: center; text-align: center; }
+  .rosca-centro .n { font-family: var(--display); font-weight: 650;
+                     font-size: 1.55rem; line-height: 1; }
+  .rosca-centro .r { color: var(--muted); font-size: .67rem; margin-top: 4px; }
+  .rosca-leg { display: grid; gap: 7px; margin-top: 15px; font-size: .79rem; }
+  .rosca-item { display: flex; align-items: center; gap: 8px; }
+  .rosca-ponto { width: 10px; height: 10px; border-radius: 3px; flex: none;
+                 background: currentColor; }
+  /* o rótulo é texto: fica na tinta do corpo, quem carrega a cor é o ponto */
+  .rosca-rot { flex: 1; color: var(--ink); display: inline-flex;
+               align-items: center; gap: 6px; }
+  .rosca-n { font-family: var(--mono); font-size: .75rem; color: var(--muted);
+             flex: none; }
+  .rosca-item.zero { opacity: .45; }
+  /* mesmas tintas das barras e dos badges */
+  .f-g { color: var(--guiado); }
+  .f-i { color: var(--inter); }
+  .f-d { color: var(--direto); }
+  .f-a { color: var(--accent); }
+  .f-n { color: #8A8780; }
+
+  /* ---- o resumo em texto: gerado dos mesmos números já pintados acima */
+  .resumo-txt { font-size: .95rem; line-height: 1.65; margin: 0;
+                color: var(--muted); }
+  .resumo-txt b { color: var(--ink); font-weight: 600; }
+  .dash-topo .stats-num { font-size: 1.9rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .stats-fill { transition: width .35s ease; }
+    .rosca .fatia { transition: stroke-dasharray .35s ease,
+                                stroke-dashoffset .35s ease; }
+  }
+
+  /* ---- card de atendimento: densidade varia com o caminho (assinatura) */
+  .card {
+    --cor: #8A8780;      /* neutro: sessão ainda sem caminho definido */
+    --pad: 20px;
+    --fs: .95rem;
+    --lh: 1.55;
+    --badge: .72rem;
+    --raio: 14px;
+    --gap-msg: 14px;
+    position: relative;
+    background: var(--surface);
+    border-left: 5px solid var(--cor);
+    border-radius: var(--raio);
+    box-shadow: 0 1px 2px rgba(28,27,31,.05), 0 4px 16px rgba(28,27,31,.05);
+    padding: var(--pad);
+    margin-bottom: 18px;
+  }
+  .card.c-GUIADO { --cor: var(--guiado); --pad: 30px; --fs: 1.06rem;
+                   --lh: 1.7; --badge: .8rem; --raio: 18px; --gap-msg: 20px; }
+  .card.c-INTERMEDIARIO { --cor: var(--inter); }
+  .card.c-DIRETO { --cor: var(--direto); --pad: 14px; --fs: .86rem;
+                   --lh: 1.45; --badge: .66rem; --raio: 9px; --gap-msg: 8px; }
+
+  /* marca d'água: o mesmo sinal do caminho, no volume de uma textura.
+     Recuada à esquerda da seta pra não disputar espaço com ela. */
+  .marca { position: absolute; top: calc(var(--pad) * .5);
+           right: calc(var(--pad) + 34px);
+           width: 74px; height: auto; color: var(--cor); opacity: .07;
+           pointer-events: none; }
+
+  /* o cabeçalho inteiro é o botão de expandir/colapsar (alvo grande,
+     acessível por teclado) — reset do <button> pra herdar o card */
+  .cabecalho { display: flex; gap: 10px; align-items: baseline;
+               flex-wrap: wrap; margin: 0; width: 100%; position: relative;
+               background: none; border: 0; padding: 0; text-align: left;
+               font: inherit; color: inherit; cursor: pointer; }
+  .cabecalho:focus-visible { outline: 2px solid var(--accent);
+                             outline-offset: 4px; border-radius: 6px; }
+  .seta { margin-left: auto; color: var(--muted); font-size: var(--badge);
+          align-self: center; }
+  [aria-expanded="true"] > .seta { transform: rotate(180deg); }
+  /* margem no bloco de falas, não no cabeçalho: colapsado não sobra vão */
+  .conversa { margin-top: calc(var(--gap-msg) + 2px); position: relative; }
+  .conversa[hidden] { display: none; }
+  .num { font-family: var(--display); font-weight: 650;
+         font-size: calc(var(--fs) * 1.35); }
+  .badge { font-size: var(--badge); font-weight: 600; padding: 3px 10px;
+           border-radius: 99px; white-space: nowrap; }
+  .badge.nivel { background: #EFEDE7; color: var(--ink); }
+  .badge.caminho { background: var(--cor); color: #fff;
+                   display: inline-flex; align-items: center; gap: 7px; }
+  .badge.tarefa { background: none; color: var(--muted);
+                  border: 1px solid #DDDAD2; }
+  .badge.alerta { background: var(--alerta); color: #fff; }
+
+  /* ---- identificação: 3 etapas viram 1 linha; o detalhe fica sob demanda */
+  .ident { margin-bottom: var(--gap-msg); }
+  .ident-linha {
+    display: flex; align-items: center; gap: 7px; width: 100%;
+    background: none; border: 0; border-bottom: 1px solid var(--linha);
+    padding: 0 0 7px; text-align: left; cursor: pointer;
+    font: inherit; font-size: calc(var(--badge) * 1.02);
+    color: var(--muted);
+  }
+  .ident-linha:focus-visible { outline: 2px solid var(--accent);
+                               outline-offset: 3px; border-radius: 5px; }
+  .ident-linha .sep { opacity: .5; }
+  /* a seta acompanha o rótulo (não vai pra borda): a linha inteira continua
+     clicável, mas lê como um bloco compacto só */
+  .ident-linha .seta { margin-left: 5px; }
+  .quando { font-family: var(--mono); }
+  .ident-det { margin: 11px 0 0 4px; padding-left: 12px;
+               border-left: 2px solid var(--linha); }
+  .ident-det[hidden] { display: none; }
+  .ident-det .passo { color: var(--muted); font-size: calc(var(--fs) * .88);
+                      line-height: var(--lh); white-space: pre-wrap;
+                      margin-bottom: 9px; }
+  .ident-det .passo .quando { margin-right: 9px;
+                              font-size: calc(var(--badge) * .95); }
+  .ident-nota { color: var(--muted); font-style: italic;
+                font-size: calc(var(--badge) * .95); }
+
+  /* mensagens em formato de conversa */
+  .fala { margin-bottom: var(--gap-msg); }
+  .fala:last-child { margin-bottom: 0; }
+  /* balão do usuário = cor do caminho em intensidade baixa (não é uma cor
+     própria): sobre o papel da página, pra ficar tinta e não bloco */
+  .pessoa {
+    display: inline-block; max-width: 78%;
+    background: color-mix(in srgb, var(--cor) 7%, var(--bg));
+    border: 1px solid color-mix(in srgb, var(--cor) 16%, var(--bg));
+    border-radius: var(--raio); border-bottom-left-radius: 4px;
+    padding: calc(var(--pad) * .38) calc(var(--pad) * .55);
+    font-size: var(--fs); line-height: var(--lh);
+  }
+  .meta { color: var(--muted); font-size: calc(var(--badge) * .95);
+          font-family: var(--mono); margin-bottom: 3px; }
+  .bot {
+    color: var(--muted); font-size: calc(var(--fs) * .92);
+    line-height: var(--lh); white-space: pre-wrap;
+    border-left: 2px solid var(--linha);
+    margin: 6px 0 0 14px; padding-left: 12px;
+  }
+  .mono { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+
+  .vazio {
+    background: var(--surface); border: 1px dashed #DDDAD2;
+    border-radius: 16px; padding: 56px 24px; text-align: center;
+    color: var(--muted);
+  }
+  .vazio b { font-family: var(--display); color: var(--ink);
+             font-size: 1.15rem; font-weight: 650; display: block;
+             margin-bottom: 8px; }
+
+  /* card estreito: os badges ocupam a largura toda e a marca d'água
+     passaria por trás deles — sai de cena */
+  @media (max-width: 680px) { .marca { display: none; } }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .seta { transition: transform .18s ease; }
+    .card { animation: chega .3s ease; }
+    @keyframes chega { from { opacity: 0; transform: translateY(6px); }
+                       to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32"
+      height="32" rx="7" fill="#5B21B6"/><rect x="6" y="8" width="20"
+      height="13" rx="3.5" fill="#fff"/><path d="M11 21h6l-6 5z" fill="#fff"/>
+      <circle cx="12" cy="14.5" r="1.6" fill="#5B21B6"/><circle cx="16"
+      cy="14.5" r="1.6" fill="#5B21B6"/><circle cx="20" cy="14.5" r="1.6"
+      fill="#5B21B6"/></svg>Iara · Motor de Letramento Digital</h1>
+    <div class="sub">Nível INAF estimado por atendimento — recalculado a cada
+    sessão, sem rótulo permanente nem identificação pessoal · ao vivo (2s)</div>
+    <div class="legenda" id="legenda"></div>
+  </header>
+
+  <div class="abas" role="tablist" aria-label="Visões do painel">
+    <button class="aba" type="button" role="tab" id="aba-atendimentos"
+            data-aba="atendimentos" aria-controls="painel-atendimentos"
+            aria-selected="true">💬 Atendimentos</button>
+    <button class="aba" type="button" role="tab" id="aba-dados"
+            data-aba="dados" aria-controls="painel-dados"
+            aria-selected="false">📊 Dados</button>
+  </div>
+
+  <div class="painel" id="painel-atendimentos" role="tabpanel"
+       aria-labelledby="aba-atendimentos">
+    <main id="lista">
+      <div class="vazio"><b>Nenhum atendimento ainda</b>
+      Mande uma mensagem — texto ou áudio — pro bot no Telegram e a conversa
+      aparece aqui.</div>
+    </main>
+  </div>
+
+  <div class="painel" id="painel-dados" role="tabpanel"
+       aria-labelledby="aba-dados" hidden>
+    <section class="dash" id="estatisticas" aria-live="polite">
+      <div class="cartao dash-full stats-vazio">Nenhum atendimento ainda</div>
+    </section>
+  </div>
+</div>
+
+<script>
+// barras = quanto de autonomia o caminho pressupõe (1 de 3 → 3 de 3)
+const CAMINHO = {
+  GUIADO:        { rotulo: "Guiado",        barras: 1 },
+  INTERMEDIARIO: { rotulo: "Intermediário", barras: 2 },
+  DIRETO:        { rotulo: "Direto",        barras: 3 },
+};
+const TAREFA_LABEL = { TROCAR_PLANO: "📱 Troca de plano",
+                       CONSULTAR_FATURA: "🧾 Fatura",
+                       RECLAMAR_SINAL: "📡 Sinal",   // 📶 agora é o ícone de caminho
+                       CANCELAR_LINHA: "❌ Cancelamento",
+                       FORA_DE_ESCOPO: "🚫 Fora de escopo",
+                       // despedida/agradecimento sem nenhum pedido antes —
+                       // distinto de FORA_DE_ESCOPO: aqui nada foi solicitado,
+                       // não é um pedido que não coube nas 4 tarefas
+                       DESPEDIDA: "👋 Sem pedido" };
+
+// nível INAF → caminho que ele ativa (mesma regra do classificador.py). Serve
+// pra barra do nível herdar a cor do caminho: a leitura fica encadeada.
+const NIVEL_CAMINHO = {
+  "Analfabeto":    "GUIADO",
+  "Rudimentar":    "GUIADO",
+  "Elementar":     "INTERMEDIARIO",
+  "Intermediário": "DIRETO",
+  "Proficiente":   "DIRETO",
+};
+// as 4 tarefas de atendimento; FORA_DE_ESCOPO não é uma delas e fica fora.
+// A cor aqui é só pra distinguir fatias — reaproveita a paleta da marca, sem
+// significar caminho (tarefa e caminho são eixos independentes).
+const TAREFAS_GRAFICO = ["TROCAR_PLANO", "CONSULTAR_FATURA",
+                         "RECLAMAR_SINAL", "CANCELAR_LINHA"];
+const TAREFA_COR = { TROCAR_PLANO: 'a', CONSULTAR_FATURA: 'i',
+                     RECLAMAR_SINAL: 'd', CANCELAR_LINHA: 'g' };
+
+// as 3 barras num só desenho; `data-n` apaga as que passam do nível
+function sinal(n, classe = "sinal") {
+  return `<svg class="${classe}" data-n="${n}" viewBox="0 0 17 12"
+    aria-hidden="true"><rect x="0" y="7.5" width="4" height="4.5" rx="1.2"/>
+    <rect x="6.5" y="3.75" width="4" height="8.25" rx="1.2"/>
+    <rect x="13" y="0" width="4" height="12" rx="1.2"/></svg>`;
+}
+
+document.getElementById('legenda').innerHTML =
+  Object.entries(CAMINHO).map(([chave, c]) =>
+    `<span class="leg ${chave[0].toLowerCase()}">${sinal(c.barras)}${c.rotulo}</span>`
+  ).join('') +
+  `<span class="leg-hint">sinal fraco = mais suporte · a densidade do card
+   acompanha o caminho</span>`;
+
+function esc(s) { const d = document.createElement('div');
+                  d.textContent = s || ''; return d.innerHTML; }
+
+// protocolo, valores e dia de vencimento em monoespaçada
+function realca(s) {
+  return esc(s)
+    .replace(/(Protocolo: )(\d+)/g, '$1<span class="mono">$2</span>')
+    .replace(/R\$&nbsp;?\s?[\d.,]+|R\$ [\d.,]+/g,
+             m => `<span class="mono">${m}</span>`);
+}
+
+// Mesmo marcador de estado.py (MARCADOR_ATENDENTE) — não dá pra importar do
+// Python aqui, então o trecho literal é duplicado a dedo. Ver o comentário
+// lá pra por que é esse trecho e não a MSG_FORA_ESCOPO (que também fala em
+// "atendente humano", mas no condicional, e não é encaminhamento de fato).
+const MARCADOR_ATENDENTE = "Vou te conectar com um atendente humano";
+
+function resumo(eventos) {
+  let nivel = "—", nivelTarefa = "—", caminho = "";
+  let encaminhado = false;
+  const tarefas = [];
+  for (const e of eventos) {
+    if (e.nivel && e.nivel !== "—") nivel = e.nivel;
+    // badge do card: só conta nível de mensagem com tarefa reconhecida —
+    // despedida/fora-de-escopo tem pouco ou nada pra avaliar letramento e
+    // não deve sobrescrever a última classificação de tarefa real.
+    if (e.nivel && e.nivel !== "—" && TAREFAS_GRAFICO.includes(e.tarefa))
+      nivelTarefa = e.nivel;
+    if (CAMINHO[e.caminho]) caminho = e.caminho;
+    if (TAREFA_LABEL[e.tarefa] && !tarefas.includes(e.tarefa))
+      tarefas.push(e.tarefa);
+    if (e.resposta_bot && e.resposta_bot.includes(MARCADOR_ATENDENTE))
+      encaminhado = true;
+  }
+  return { nivel, nivelTarefa, caminho, tarefas, encaminhado };
+}
+
+function fala(e) {
+  return `<div class="fala">
+    <div class="meta">${esc(e.ts)} ${e.origem === 'audio' ? '· 🎤 áudio' : ''}</div>
+    <div class="pessoa">${esc(e.mensagem)}</div>
+    <div class="bot">${realca(e.resposta_bot)}</div></div>`;
+}
+
+// A identificação é ritual de abertura, não conversa: as 3 etapas (achar o
+// cadastro → 4 dígitos → verificado) viram UMA linha com o horário da última.
+// Nome e telefone continuam fora do log — o detalhe mostra só o que a Iara
+// respondeu.
+function identificacao(etapas, id, concluida, aberto) {
+  const fim = etapas[etapas.length - 1];
+  return `<div class="ident">
+    <button class="ident-linha" type="button" data-abre="${id}"
+            aria-expanded="${aberto}" aria-controls="${id}">
+      <span>🪪</span>
+      <span>Identificação ${concluida ? 'verificada' : 'em andamento'}</span>
+      <span class="sep">·</span>
+      <span class="quando">${esc(fim.ts)}</span>
+      <span class="seta" aria-hidden="true">▾</span>
+    </button>
+    <div class="ident-det" id="${id}" ${aberto ? '' : 'hidden'}>
+      ${etapas.map(e => `<div class="passo"><span class="quando">${esc(e.ts)}</span>${realca(e.resposta_bot)}</div>`).join('')}
+      <div class="ident-nota">dados de identificação não registrados</div>
+    </div></div>`;
+}
+
+// percorre os eventos agrupando as sequências de identificação
+function corpo(eventos, num) {
+  const partes = [];
+  let i = 0, seq = 0;
+  while (i < eventos.length) {
+    if (eventos[i].tarefa !== 'IDENTIFICACAO') { partes.push(fala(eventos[i++])); continue; }
+    const etapas = [];
+    while (i < eventos.length && eventos[i].tarefa === 'IDENTIFICACAO')
+      etapas.push(eventos[i++]);
+    const id = `ident-${num}-${seq++}`;
+    // veio conversa depois da sequência? então a identificação fechou
+    partes.push(identificacao(etapas, id, i < eventos.length,
+                              estaAberto(id, false)));
+  }
+  return partes.join('');
+}
+
+let ultimoPayload = "";
+
+// Só as escolhas EXPLÍCITAS do usuário ficam aqui. O padrão (mais recente
+// aberto, resto fechado; identificação sempre recolhida) é recalculado a cada
+// render — assim um atendimento novo já entra aberto pra acompanhar ao vivo,
+// sem apagar o que o usuário abriu/fechou na mão.
+const escolhas = new Map();   // id do bloco -> aberto?
+
+function estaAberto(id, padrao) {
+  return escolhas.has(id) ? escolhas.get(id) : padrao;
+}
+
+// delegação: 1 listener no container, serve card e identificação, e
+// sobrevive a todo re-render
+document.getElementById('lista').addEventListener('click', ev => {
+  const botao = ev.target.closest('[data-abre]');
+  if (!botao) return;
+  const aberto = botao.getAttribute('aria-expanded') === 'true';
+  escolhas.set(botao.dataset.abre, !aberto);
+  botao.setAttribute('aria-expanded', String(!aberto));
+  document.getElementById(botao.dataset.abre).hidden = aberto;
+});
+
+async function atualiza() {
+  try {
+    const r = await fetch('api/atendimentos');
+    const corpoResp = await r.text();
+    if (corpoResp === ultimoPayload) return;   // nada mudou: não re-renderiza
+    ultimoPayload = corpoResp;
+    const grupos = JSON.parse(corpoResp);
+    if (!grupos.length) return;
+    // o bloco de estatísticas depende disto: repinta quando o total mudar
+    niveisAtual = contaNiveis(grupos);
+    if (statsAtual) pintaEstatisticas();
+    document.getElementById('lista').innerHTML = grupos.map((g, i) => {
+      const s = resumo(g.eventos);
+      const c = CAMINHO[s.caminho];
+      const id = `conversa-${g.atendimento}`;
+      const aberto = estaAberto(id, i === 0);
+      return `
+      <div class="card c-${s.caminho || 'NEUTRO'}">
+        ${c ? sinal(c.barras, 'sinal marca') : ''}
+        <button class="cabecalho" type="button" aria-expanded="${aberto}"
+                aria-controls="${id}" data-abre="${id}">
+          <span class="num">Atendimento #${g.atendimento}</span>
+          <span class="badge nivel">INAF: ${esc(s.nivelTarefa)}</span>
+          ${c ? `<span class="badge caminho">${sinal(c.barras)}${c.rotulo}</span>` : ''}
+          ${s.encaminhado ? '<span class="badge alerta">⚠️ Encaminhado para humano</span>' : ''}
+          ${s.tarefas.map(t => `<span class="badge tarefa">${TAREFA_LABEL[t]}</span>`).join('')}
+          <span class="seta" aria-hidden="true">▾</span>
+        </button>
+        <div class="conversa" id="${id}" ${aberto ? '' : 'hidden'}>
+          ${corpo(g.eventos, g.atendimento)}
+        </div>
+      </div>`;
+    }).join('');
+  } catch (err) { /* backend fora do ar: tenta no próximo tick */ }
+}
+// ---- bloco agregado do topo: contagens de /api/estatisticas + a distribuição
+// por nível, contada no navegador (ver contaNiveis)
+let ultimoStats = "";
+let statsAtual = null;    // último /api/estatisticas já parseado
+let niveisAtual = null;   // { contagem, base, total } — vem de /api/atendimentos
+
+// um grupo = título + barras. A largura é sempre a fração de `base` (nunca
+// reescalada pela maior barra): assim o desenho e o número dizem a mesma
+// coisa. Caminho e nível dividem a mesma base e somam 100%; tarefa não soma,
+// porque um atendimento pode ter duas — por isso ali o número é a contagem.
+function grupoBarras(titulo, itens, base, classe = "", nota = "") {
+  return `<div class="cartao dash-larga stats-grupo${classe ? ' ' + classe : ''}">
+    <h3 class="stats-titulo">${titulo}</h3>
+    ${itens.map(i => `<div class="stats-linha ${i.cor || 'n'}">
+      <span class="stats-nome">${i.rotulo}</span>
+      <span class="stats-trilho"><span class="stats-fill"
+            style="width:${base ? Math.round(i.n / base * 100) : 0}%"></span></span>
+      <span class="stats-pct">${i.valor !== undefined ? i.valor : i.n}</span>
+    </div>`).join('')}
+    ${nota ? `<p class="stats-nota">${nota}</p>` : ''}
+  </div>`;
+}
+
+// Rosca só pra grupo em que as fatias formam um todo. A régua é `total` (a
+// soma das fatias), então o desenho e os percentuais da legenda dizem a mesma
+// coisa. Fatia zerada não vira arco, mas continua na legenda — some do desenho
+// e não do inventário.
+function grupoRosca(titulo, itens, centro, classe = "", nota = "", extra = "") {
+  const total = itens.reduce((s, i) => s + i.n, 0);
+  const pct = n => total ? n / total * 100 : 0;
+  let consumido = 0;
+  const fatias = itens.filter(i => i.n > 0).map(i => {
+    const p = pct(i.n);
+    const arco = `<circle class="fatia f-${i.cor || 'n'}" cx="21" cy="21"
+      r="15.9155" stroke-dasharray="${p.toFixed(2)} ${(100 - p).toFixed(2)}"
+      stroke-dashoffset="${(-consumido).toFixed(2)}"></circle>`;
+    consumido += p;
+    return arco;
+  }).join('');
+  // o SVG é decorativo; a leitura acessível é a mesma legenda, em texto
+  const legenda = itens.map(i => `<div class="rosca-item f-${i.cor || 'n'}${
+      i.n ? '' : ' zero'}">
+    <span class="rosca-ponto"></span>
+    <span class="rosca-rot">${i.rotulo}</span>
+    <span class="rosca-n">${Math.round(pct(i.n))}% · ${i.n}</span>
+  </div>`).join('');
+  return `<div class="cartao dash-rosca${classe ? ' ' + classe : ''}">
+    <h3 class="stats-titulo">${titulo}</h3>
+    <div class="rosca-box">
+      <svg class="rosca" viewBox="0 0 42 42" aria-hidden="true">
+        <circle class="trilho" cx="21" cy="21" r="15.9155"></circle>
+        ${fatias}
+      </svg>
+      <div class="rosca-centro"><span class="n">${centro.n}</span>
+        <span class="r">${centro.rotulo}</span></div>
+    </div>
+    <div class="rosca-leg">${legenda}</div>
+    ${nota ? `<p class="stats-nota">${nota}</p>` : ''}
+    ${extra}
+  </div>`;
+}
+
+// percentual sobre os atendimentos que já têm caminho (base honesta)
+function itensCaminho(s) {
+  return Object.entries(CAMINHO).map(([chave, c]) => {
+    const n = s.caminhos[chave] || 0;
+    return { n, cor: chave[0].toLowerCase(),
+             rotulo: `${sinal(c.barras)}${c.rotulo}`,
+             valor: `${Math.round(n / s.com_caminho * 100)}%` };
+  });
+}
+
+// cor do caminho que o nível ativa — mesma tinta das outras barras
+function itensNivel(niveis) {
+  return Object.entries(NIVEL_CAMINHO).map(([nivel, caminho]) => ({
+    n: niveis.contagem[nivel] || 0,
+    cor: caminho[0].toLowerCase(),
+    rotulo: nivel,
+  }));
+}
+
+function itensTarefa(s) {
+  return TAREFAS_GRAFICO.map(t => ({ n: s.tarefas[t] || 0,
+                                     cor: TAREFA_COR[t],
+                                     rotulo: TAREFA_LABEL[t] }));
+}
+
+// Taxa de RESOLUÇÃO — quantos atendimentos a Iara levou até o fim sozinha.
+// Não é acurácia: não diz nada sobre o nível ter sido classificado certo,
+// só sobre ter precisado (ou não) encaminhar pra atendente humano.
+function itensResolucao(r) {
+  const pct = n => `${Math.round(n / r.base * 100)}%`;
+  return [
+    { n: r.sem_atendente, cor: 'd', rotulo: 'Sem atendente',
+      valor: pct(r.sem_atendente) },
+    { n: r.encaminhados, cor: 'n', rotulo: 'Encaminhados',
+      valor: pct(r.encaminhados) },
+  ];
+}
+
+// Sem link pro card em Atendimentos: aquela aba só carrega os 10 mais
+// recentes (/api/atendimentos), então um encaminhamento antigo pode nem
+// estar no DOM — um link ali quebraria silenciosamente. Só o número mesmo.
+const LIMITE_ENCAMINHADOS = 10;
+let encaminhadosAbertos = false;
+
+function blocoEncaminhados(ids) {
+  if (!ids || !ids.length) return '';
+  const visiveis = encaminhadosAbertos ? ids : ids.slice(0, LIMITE_ENCAMINHADOS);
+  const nums = visiveis.map(n => `<span class="mono">#${n}</span>`).join(', ');
+  const resto = ids.length - LIMITE_ENCAMINHADOS;
+  return `<div class="encaminhados">
+    <span class="encaminhados-rot">Encaminhados para humano:</span> ${nums}
+    ${resto > 0 ? `<button class="encaminhados-toggle" type="button"
+      data-toggle-encaminhados>${encaminhadosAbertos
+        ? 'ver só os recentes' : `ver todos (${ids.length})`}</button>` : ''}
+  </div>`;
+}
+
+// duração em ordem de grandeza, não em cronômetro: abaixo de 90s o segundo
+// ainda diz algo; daí pra cima, minuto arredondado basta
+function tempoCurto(seg) {
+  return seg < 90 ? `${Math.round(seg)}s` : `${Math.round(seg / 60)} min`;
+}
+
+// Aqui a barra NÃO é fatia de um todo (tempos não somam 100%): a régua é o
+// maior tempo do grupo, e o número ao lado é que carrega o valor absoluto.
+function itensTempo(porNivel) {
+  return Object.keys(NIVEL_CAMINHO)
+    .filter(nivel => porNivel[nivel])
+    .map(nivel => ({ n: porNivel[nivel].segundos,
+                     cor: NIVEL_CAMINHO[nivel][0].toLowerCase(),
+                     rotulo: nivel,
+                     valor: tempoCurto(porNivel[nivel].segundos) }));
+}
+
+// maior entrada de um mapa {chave: contagem}, ignorando zerados
+function maior(contagem) {
+  const par = Object.entries(contagem || {}).filter(([, n]) => n > 0)
+                    .sort((a, b) => b[1] - a[1])[0];
+  return par ? { chave: par[0], n: par[1] } : null;
+}
+
+// A leitura em prosa dos MESMOS números já pintados acima — nenhuma chamada
+// nova, nenhuma IA: só lê statsAtual/niveisAtual e monta as frases. Cada
+// trecho só entra se a base dele existir, e o verbo muda conforme o topo passe
+// ou não de metade ("a maioria" vs "o mais comum foi").
+function textoResumo() {
+  const s = statsAtual;
+  if (!s || !s.total) return '';
+  const frases = [];
+
+  const cam = s.com_caminho ? maior(s.caminhos) : null;
+  if (cam) {
+    const p = Math.round(cam.n / s.com_caminho * 100);
+    let f = p >= 50
+      ? `A maioria dos atendimentos (<b>${p}%</b>) foi pelo caminho
+         <b>${CAMINHO[cam.chave].rotulo}</b>`
+      : `O caminho mais comum foi o <b>${CAMINHO[cam.chave].rotulo}</b>,
+         em <b>${p}%</b> dos atendimentos`;
+    const niv = niveisAtual && niveisAtual.base ? maior(niveisAtual.contagem) : null;
+    if (niv) {
+      const pn = Math.round(niv.n / niveisAtual.base * 100);
+      f += pn >= 50 ? `, majoritariamente de nível <b>${niv.chave}</b>`
+                    : `, com o nível <b>${niv.chave}</b> à frente (${pn}%)`;
+    }
+    frases.push(f + '.');
+  }
+
+  const r = s.resolucao;
+  if (r && r.base) {
+    const p = Math.round(r.sem_atendente / r.base * 100);
+    frases.push(`<b>${p}%</b> não precisaram de atendente humano` +
+      (r.encaminhados
+        ? ` — ${r.encaminhados} de ${r.base} foram encaminhados.`
+        : `: nenhum dos ${r.base} foi encaminhado.`));
+  }
+
+  const contagemTarefas = {};
+  for (const t of TAREFAS_GRAFICO) contagemTarefas[t] = s.tarefas[t] || 0;
+  const tar = maior(contagemTarefas);
+  if (tar) frases.push(`A tarefa mais pedida foi
+    <b>${TAREFA_LABEL[tar.chave].replace(/^\S+\s/, '')}</b>
+    (${tar.n} de ${s.total}).`);
+
+  return frases.join(' ');
+}
+
+function pintaEstatisticas() {
+  const s = statsAtual;
+  const alvo = document.getElementById('estatisticas');
+  if (!s || !s.total) {
+    alvo.innerHTML =
+      '<div class="cartao dash-full stats-vazio">Nenhum atendimento ainda</div>';
+    return;
+  }
+  // atendimento que só passou pela identificação ainda não tem caminho:
+  // dizer isso é mais honesto que mostrar 0%/0%/0%
+  const pendentes = s.total - s.com_caminho;
+  const hint = !s.com_caminho
+    ? 'aguardando a primeira classificação'
+    : (pendentes ? `${pendentes} sem caminho definido ainda` : '');
+
+  // cada grupo só entra quando tem o que mostrar — mesmo critério do bloco
+  // inteiro, que some enquanto não há atendimento.
+  // Rosca pros grupos cujas fatias somam um todo; barra pros que não somam
+  // (nível é distribuição de outra base, tempo é duração).
+  const grupos = [];
+  if (s.com_caminho)
+    grupos.push(grupoRosca('Caminho de atendimento', itensCaminho(s),
+      { n: s.com_caminho, rotulo: 'com caminho' }));
+
+  const tarefas = itensTarefa(s);
+  const totalTarefas = tarefas.reduce((a, i) => a + i.n, 0);
+  if (totalTarefas)
+    // a base aqui é a soma das tarefas, não os atendimentos: um atendimento
+    // com duas tarefas conta nas duas, então só assim as fatias fecham 100%
+    grupos.push(grupoRosca('Tarefa', tarefas,
+      { n: totalTarefas, rotulo: totalTarefas > 1 ? 'tarefas' : 'tarefa' }, '',
+      `${totalTarefas} tarefa${totalTarefas > 1 ? 's' : ''} em ${s.total}
+       atendimento${s.total > 1 ? 's' : ''} — um atendimento pode ter mais
+       de uma.`));
+
+  const r = s.resolucao;
+  if (r && r.base)
+    grupos.push(grupoRosca('Resolução', itensResolucao(r),
+      { n: `${Math.round(r.sem_atendente / r.base * 100)}%`,
+        rotulo: 'sem atendente' }, '',
+      'quantos a Iara levou até o fim sozinha — não é acurácia de nível.',
+      blocoEncaminhados(r.ids_encaminhados)));
+
+  if (niveisAtual && niveisAtual.base) {
+    // /api/atendimentos devolve só os mais recentes: quando há mais
+    // atendimentos que isso, o título diz sobre que base está falando
+    const base = niveisAtual.total < s.total
+      ? ` <span class="stats-base">· últimos ${niveisAtual.total}</span>` : '';
+    grupos.push(grupoBarras(`Nível INAF${base}`, itensNivel(niveisAtual),
+                            niveisAtual.base));
+  }
+  // este grupo vê o banco inteiro (vem de /api/estatisticas), não só os
+  // últimos 10 do grupo de nível — por isso a base pode não bater
+  const tempos = itensTempo(s.tempo_por_nivel || {});
+  if (tempos.length)
+    grupos.push(grupoBarras('Tempo médio de atendimento', tempos,
+      Math.max(...tempos.map(i => i.n)), 'stats-tempos',
+      'do primeiro ao último evento do atendimento'));
+
+  const texto = textoResumo();
+
+  alvo.innerHTML = `
+    <div class="cartao dash-full dash-topo">
+      <span class="stats-num">${s.total}</span>
+      <span class="stats-rotulo">atendimento${s.total > 1 ? 's' : ''}
+        ${hint ? `· ${hint}` : ''}</span>
+    </div>
+    ${grupos.join('')}
+    ${texto ? `<div class="cartao dash-full">
+      <h3 class="stats-titulo">Leitura</h3>
+      <p class="resumo-txt">${texto}</p>
+    </div>` : ''}`;
+}
+
+// A distribuição por nível não vem de /api/estatisticas — é contada aqui, a
+// partir dos mesmos grupos de /api/atendimentos que já alimentam os cards,
+// com a regra do resumo() (vale o último nível do atendimento). Base menor
+// que a dos outros grupos, porque aquele endpoint traz só os mais recentes.
+function contaNiveis(grupos) {
+  const contagem = {};
+  let base = 0;
+  for (const g of grupos) {
+    const { nivel } = resumo(g.eventos);
+    if (!(nivel in NIVEL_CAMINHO)) continue;   // '—': ainda sem classificação
+    contagem[nivel] = (contagem[nivel] || 0) + 1;
+    base++;
+  }
+  return { contagem, base, total: grupos.length };
+}
+
+async function atualizaEstatisticas() {
+  try {
+    const r = await fetch('api/estatisticas');
+    const corpoResp = await r.text();
+    if (corpoResp === ultimoStats) return;   // nada mudou: não re-renderiza
+    ultimoStats = corpoResp;
+    statsAtual = JSON.parse(corpoResp);
+    pintaEstatisticas();
+  } catch (err) { /* backend fora do ar: tenta no próximo tick */ }
+}
+
+// ---- abas: só visibilidade. As duas visões continuam sendo atualizadas pelo
+// mesmo tick, então nada é remontado ao voltar — o que estava expandido segue
+// expandido. O scroll de cada aba é guardado e devolvido na volta, porque as
+// duas têm alturas bem diferentes.
+const scrollAba = { dados: 0, atendimentos: 0 };
+let abaAtual = 'atendimentos';
+
+function trocaAba(nome) {
+  if (nome === abaAtual || !(nome in scrollAba)) return;
+  scrollAba[abaAtual] = window.scrollY;
+  abaAtual = nome;
+  document.querySelectorAll('.aba').forEach(b => {
+    const ativa = b.dataset.aba === nome;
+    b.setAttribute('aria-selected', String(ativa));
+    document.getElementById(b.getAttribute('aria-controls')).hidden = !ativa;
+  });
+  window.scrollTo(0, scrollAba[nome]);   // depois de exibir: a altura já vale
+}
+
+document.querySelector('.abas').addEventListener('click', ev => {
+  const botao = ev.target.closest('.aba');
+  if (botao) trocaAba(botao.dataset.aba);
+});
+
+document.getElementById('estatisticas').addEventListener('click', ev => {
+  if (!ev.target.closest('[data-toggle-encaminhados]')) return;
+  encaminhadosAbertos = !encaminhadosAbertos;
+  pintaEstatisticas();
+});
+
+function tick() { atualiza(); atualizaEstatisticas(); }
+tick();
+setInterval(tick, 2000);
+</script>
